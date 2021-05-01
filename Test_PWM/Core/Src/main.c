@@ -29,6 +29,7 @@ unsigned long T; // For PWM
 uint8_t i = 0;   // For PWM
 bool flag;       // For PWM
 uint16_t adc_value; // For ADC
+int16_t value = 0; // For function "map"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -361,27 +362,27 @@ void Start_PhotoResistor_Task(void *argument) {
 	/* USER CODE BEGIN Start_PhotoResistor_Task */
 	/* Infinite loop */
 	for (;;) {
-		if (HAL_GetTick() - T >= 5) {  // "Припровняли" тики к секундам
-			T = HAL_GetTick();
-			if (flag) {
-				TIM2->CCR2 = i;
-				TIM2->CCR3 = 255 - i;
-				i++;
-				if (i == 255) {
-					i = 0;
-					flag = 0;
-				}
-			}
-			if (!flag) {
-				TIM2->CCR3 = i;
-				TIM2->CCR2 = 255 - i;
-				i++;
-				if (i == 255) {
-					i = 0;
-					flag = 1;
-				}
-			}
-		}
+		/*		if (HAL_GetTick() - T >= 5) {  // "Припровняли" тики к секундам
+		 T = HAL_GetTick();
+		 if (flag) {
+		 TIM2->CCR2 = i;
+		 TIM2->CCR3 = 255 - i;
+		 i++;
+		 if (i == 255) {
+		 i = 0;
+		 flag = 0;
+		 }
+		 }
+		 if (!flag) {
+		 TIM2->CCR3 = i;
+		 TIM2->CCR2 = 255 - i;
+		 i++;
+		 if (i == 255) {
+		 i = 0;
+		 flag = 1;
+		 }
+		 }
+		 }*/
 
 		/*---------------------------------------*/
 		HAL_ADC_Start(&hadc1); // Запускаем проеобразование сигнала с АЦП1
@@ -389,8 +390,21 @@ void Start_PhotoResistor_Task(void *argument) {
 		adc_value = HAL_ADC_GetValue(&hadc1); // Читаем наше значение с АЦП1.
 		printf("adc_value - %d \n", adc_value);
 		HAL_ADC_Stop(&hadc1); // Останавливаем проеобразование сигнала с АЦП1
-		/*TIM2->CCR2 = 127; // analogWrite(PWM,256);
-		 TIM2->CCR3 = 250;*/
+		int16_t in_max = 2000; // было 4095
+		int8_t in_min = 200;  // было 0
+		unsigned char out_max = 255;
+		int8_t out_min = 0;
+
+		value = (adc_value - in_min) * (out_max - out_min) / (in_max - in_min)
+				+ out_min; // Function map
+		if (value >= 255) {
+			value = 255;
+		}
+		if (value <= 0) {
+			value = 0;
+		}
+		TIM2->CCR2 = value; // analogWrite(PWM,value);
+
 	}
 	/* USER CODE END Start_PhotoResistor_Task */
 }
