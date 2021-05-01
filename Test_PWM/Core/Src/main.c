@@ -403,6 +403,7 @@ void Start_PhotoResistor_Task(void *argument) {
 		if (value <= 0) {
 			value = 0;
 		}
+		value = 255 - value; // Инвертируем значение.
 		TIM2->CCR2 = value; // analogWrite(PWM,value);
 
 	}
