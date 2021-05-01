@@ -25,9 +25,10 @@
 /* USER CODE BEGIN Includes */
 #include <stdio.h> /* пїЅпїЅпїЅ printf */
 #include "stdbool.h"
-unsigned long T;
-uint8_t i = 0;
-bool flag;
+unsigned long T; // For PWM
+uint8_t i = 0;   // For PWM
+bool flag;       // For PWM
+uint16_t adc_value; // For ADC
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -46,6 +47,8 @@ typedef StaticTask_t osStaticThreadDef_t;
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
+ADC_HandleTypeDef hadc1;
+
 TIM_HandleTypeDef htim2;
 
 /* Definitions for defaultTask */
@@ -70,6 +73,7 @@ const osThreadAttr_t my_PhotoResisto_attributes = { .name = "my_PhotoResisto",
 void SystemClock_Config(void);
 static void MX_GPIO_Init(void);
 static void MX_TIM2_Init(void);
+static void MX_ADC1_Init(void);
 void StartDefaultTask(void *argument);
 void Start_PhotoResistor_Task(void *argument);
 
@@ -117,8 +121,11 @@ int main(void) {
 	/* Initialize all configured peripherals */
 	MX_GPIO_Init();
 	MX_TIM2_Init();
+	MX_ADC1_Init();
 	/* USER CODE BEGIN 2 */
-	HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_2); // Запуск ШИМ на TIM2 канале2.
+	HAL_TIM_PWM_Start(&htim2, TIM_CHANNEL_2); // Запускаем ШИМ на TIM2 на канале 2.
+	HAL_ADC_Start(&hadc1); // Запустили АЦП
+	HAL_ADCEx_Calibration_Start(&hadc1); // Делаем калибровку ADC
 	/* USER CODE END 2 */
 
 	/* Init scheduler */
@@ -178,6 +185,7 @@ int main(void) {
 void SystemClock_Config(void) {
 	RCC_OscInitTypeDef RCC_OscInitStruct = { 0 };
 	RCC_ClkInitTypeDef RCC_ClkInitStruct = { 0 };
+	RCC_PeriphCLKInitTypeDef PeriphClkInit = { 0 };
 
 	/** Initializes the RCC Oscillators according to the specified parameters
 	 * in the RCC_OscInitTypeDef structure.
@@ -204,6 +212,53 @@ void SystemClock_Config(void) {
 	if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2) != HAL_OK) {
 		Error_Handler();
 	}
+	PeriphClkInit.PeriphClockSelection = RCC_PERIPHCLK_ADC;
+	PeriphClkInit.AdcClockSelection = RCC_ADCPCLK2_DIV6;
+	if (HAL_RCCEx_PeriphCLKConfig(&PeriphClkInit) != HAL_OK) {
+		Error_Handler();
+	}
+}
+
+/**
+ * @brief ADC1 Initialization Function
+ * @param None
+ * @retval None
+ */
+static void MX_ADC1_Init(void) {
+
+	/* USER CODE BEGIN ADC1_Init 0 */
+
+	/* USER CODE END ADC1_Init 0 */
+
+	ADC_ChannelConfTypeDef sConfig = { 0 };
+
+	/* USER CODE BEGIN ADC1_Init 1 */
+
+	/* USER CODE END ADC1_Init 1 */
+	/** Common config
+	 */
+	hadc1.Instance = ADC1;
+	hadc1.Init.ScanConvMode = ADC_SCAN_DISABLE;
+	hadc1.Init.ContinuousConvMode = ENABLE;
+	hadc1.Init.DiscontinuousConvMode = DISABLE;
+	hadc1.Init.ExternalTrigConv = ADC_SOFTWARE_START;
+	hadc1.Init.DataAlign = ADC_DATAALIGN_RIGHT;
+	hadc1.Init.NbrOfConversion = 1;
+	if (HAL_ADC_Init(&hadc1) != HAL_OK) {
+		Error_Handler();
+	}
+	/** Configure Regular Channel
+	 */
+	sConfig.Channel = ADC_CHANNEL_0;
+	sConfig.Rank = ADC_REGULAR_RANK_1;
+	sConfig.SamplingTime = ADC_SAMPLETIME_1CYCLE_5;
+	if (HAL_ADC_ConfigChannel(&hadc1, &sConfig) != HAL_OK) {
+		Error_Handler();
+	}
+	/* USER CODE BEGIN ADC1_Init 2 */
+
+	/* USER CODE END ADC1_Init 2 */
+
 }
 
 /**
@@ -306,7 +361,7 @@ void Start_PhotoResistor_Task(void *argument) {
 	/* USER CODE BEGIN Start_PhotoResistor_Task */
 	/* Infinite loop */
 	for (;;) {
-		if (HAL_GetTick() - T >= 1) {
+		if (HAL_GetTick() - T >= 5) {  // "Припровняли" тики к секундам
 			T = HAL_GetTick();
 			if (flag) {
 				TIM2->CCR2 = i;
@@ -315,7 +370,6 @@ void Start_PhotoResistor_Task(void *argument) {
 				if (i == 255) {
 					i = 0;
 					flag = 0;
-					osDelay(1000);
 				}
 			}
 			if (!flag) {
@@ -325,10 +379,18 @@ void Start_PhotoResistor_Task(void *argument) {
 				if (i == 255) {
 					i = 0;
 					flag = 1;
-					osDelay(1000);
 				}
 			}
 		}
+
+		/*---------------------------------------*/
+		HAL_ADC_Start(&hadc1); // Запускаем проеобразование сигнала с АЦП1
+		HAL_ADC_PollForConversion(&hadc1, 100); // Ожидание окончания преобразования! 100мс -это не означает что он будет ждать 100мс! Если преобразуется раньше то и ...
+		adc_value = HAL_ADC_GetValue(&hadc1); // Читаем наше значение с АЦП1.
+		printf("adc_value - %d \n", adc_value);
+		HAL_ADC_Stop(&hadc1); // Останавливаем проеобразование сигнала с АЦП1
+		/*TIM2->CCR2 = 127; // analogWrite(PWM,256);
+		 TIM2->CCR3 = 250;*/
 	}
 	/* USER CODE END Start_PhotoResistor_Task */
 }
