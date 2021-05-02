@@ -53,6 +53,7 @@ PA13.Mode=Trace_Asynchronous_SW
 PA13.Signal=SYS_JTMS-SWDIO
 PA14.Mode=Trace_Asynchronous_SW
 PA14.Signal=SYS_JTCK-SWCLK
+PA2.Locked=true
 PA2.Signal=S_TIM2_CH3
 PB3.Mode=Trace_Asynchronous_SW
 PB3.Signal=SYS_JTDO-TRACESWO
