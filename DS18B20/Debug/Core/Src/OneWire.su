@@ -1,0 +1,14 @@
+OneWire.c:17:26:OW_UART_Init	24	static
+OneWire.c:38:13:OW_ToBits	24	static
+OneWire.c:56:16:OW_ToByte	24	static
+OneWire.c:73:19:OneWire	16	static
+OneWire.c:78:19:OW_Begin	24	static
+OneWire.c:94:9:OW_Reset	24	static,ignoring_inline_asm
+OneWire.c:129:9:OW_Send	24	static,ignoring_inline_asm
+OneWire.c:170:13:OW_SendBits	16	static,ignoring_inline_asm
+OneWire.c:185:6:OW_ResetSearch	24	static
+OneWire.c:201:6:OW_TargetSearch	24	static
+OneWire.c:212:9:OW_Search	48	static
+OneWire.c:336:9:OW_Crc8	24	static
+OneWire.c:373:6:OW_CheckCrc16	24	static
+OneWire.c:379:10:OW_Crc16	24	static
