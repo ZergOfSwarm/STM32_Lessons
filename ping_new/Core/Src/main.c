@@ -176,41 +176,41 @@ int main(void)
 
     /* USER CODE BEGIN 3 */
 		printf("Creating socket...\r\n");
-		stat = socket(HTTP_SOCKET, Sn_MR_TCP, 80, 0);
+		stat = socket(HTTP_SOCKET, Sn_MR_TCP, 80, 0); // Создаем http сокет
 		if (stat != HTTP_SOCKET)
 			printf("socket() failed, code = %d\r\n", stat);
 		else
 			printf("Socket created, connecting...\r\n");
 
-		stat = listen(HTTP_SOCKET);
+		stat = listen(HTTP_SOCKET); // Слушаем созданный сокет http
 		if (stat != SOCK_OK)
 			printf("listen() failed, code = %d\r\n", stat);
 		else
 			printf("listen() OK\r\n");
 
-		while (getSn_SR(HTTP_SOCKET) == SOCK_LISTEN) {
-			HAL_Delay(2);
+		while (getSn_SR(HTTP_SOCKET) == SOCK_LISTEN) { // В бесконечном цикле проверяем слушается ли
+			HAL_Delay(2);							   // наш сокет или нет. Если слушают то подождем 2 милл.сек.
 		}
 
-		printf("Input connection\r\n");
+		printf("Input connection\r\n");                // Если не слушают а устанавливают соединение то пишем что, у нас входящее соединение.
 		if (getSn_SR(HTTP_SOCKET) != SOCK_ESTABLISHED)
 			printf("Error socket status\r\n");
 
 		uint8_t rIP[4];
 		getsockopt(HTTP_SOCKET, SO_DESTIP, rIP);
-		printf("IP:  %d.%d.%d.%d\r\n", rIP[0], rIP[1], rIP[2], rIP[3]);
+		printf("IP:  %d.%d.%d.%d\r\n", rIP[0], rIP[1], rIP[2], rIP[3]); // Вывод IP того кто с нами связался.
 
 		sprintf(Message, "input connection nr - %d", reqnr);
 
-		send(0, (uint8_t*) Message, strlen(Message));
+		send(0, (uint8_t*) Message, strlen(Message)); // Отправляем сообщение тому кто открыл соединение с нами.
 
-		disconnect(HTTP_SOCKET);
+		disconnect(HTTP_SOCKET);                      // Разрываем соединение
 
 		printf("Closing socket.\r\n");
-		close(HTTP_SOCKET);
+		close(HTTP_SOCKET);                           // Закрываем сокет
 
 		HAL_Delay(1000);
-		reqnr++;
+		reqnr++;                                      // Увеличиваем счетчик.
 	}
   /* USER CODE END 3 */
 }
