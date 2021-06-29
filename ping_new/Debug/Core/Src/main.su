@@ -6,9 +6,9 @@ main.c:80:6:W5500_WriteBuff	16	static
 main.c:84:9:W5500_ReadByte	16	static
 main.c:90:6:W5500_WriteByte	16	static
 main.c:112:5:_write	32	static
-main.c:125:5:main	32	static
-main.c:222:6:SystemClock_Config	88	static
-main.c:267:13:MX_SPI2_Init	8	static
-main.c:305:13:MX_TIM2_Init	32	static
-main.c:350:13:MX_GPIO_Init	48	static
-main.c:407:6:Error_Handler	4	static,ignoring_inline_asm
+main.c:125:5:main	48	static
+main.c:228:6:SystemClock_Config	88	static
+main.c:270:13:MX_SPI2_Init	8	static
+main.c:306:13:MX_TIM2_Init	32	static
+main.c:348:13:MX_GPIO_Init	48	static
+main.c:404:6:Error_Handler	4	static,ignoring_inline_asm
