@@ -192,6 +192,15 @@ int main(void)
     /*##-11- Unlink the SD disk I/O driver ####################################*/
     FATFS_UnLinkDriver(SDPath);
 
+
+	printf( "CardType is : %d\r\n", hsd.SdCard.CardType);         // CardType is : 0
+	printf( "CardCapacity is : %d\r\n", hsd.SdCard.BlockNbr);     // CardCapacity is : 1961984
+	printf( "CardBlockSize is : %d\r\n", hsd.SdCard.BlockSize);   // CardBlockSize is : 512
+	printf( "RCA is : %d\r\n", hsd.SdCard.RelCardAdd);            // RCA is : 45928
+	printf( "CardVersion is : %d\r\n", hsd.SdCard.CardVersion);   // CardVersion is : 1
+	printf( "Class is : %d\r\n", hsd.SdCard.Class);               // Class is : 1525
+	printf( "LogBlockNbr is : %d\r\n", hsd.SdCard.LogBlockNbr);   // LogBlockNbr is : 1961984
+	printf( "LogBlockSize is : %d\r\n", hsd.SdCard.LogBlockSize); // LogBlockSize is : 512
   /* USER CODE END 2 */
 
   /* Infinite loop */
@@ -270,7 +279,7 @@ static void MX_SDIO_SD_Init(void)
   hsd.Init.ClockPowerSave = SDIO_CLOCK_POWER_SAVE_DISABLE;
   hsd.Init.BusWide = SDIO_BUS_WIDE_1B;
   hsd.Init.HardwareFlowControl = SDIO_HARDWARE_FLOW_CONTROL_DISABLE;
-  hsd.Init.ClockDiv = 4;
+  hsd.Init.ClockDiv = 5;
   /* USER CODE BEGIN SDIO_Init 2 */
 
   /* USER CODE END SDIO_Init 2 */
