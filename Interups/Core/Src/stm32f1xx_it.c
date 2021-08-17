@@ -23,6 +23,7 @@
 #include "stm32f1xx_it.h"
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
+#include "stdio.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -206,10 +207,10 @@ void SysTick_Handler(void)
 void EXTI0_IRQHandler(void)
 {
   /* USER CODE BEGIN EXTI0_IRQn 0 */
-
+	HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_SET);
+	printf("LED is OFF \r\n"); // Отключен т.к. LED подключен по обратной схеме!
   /* USER CODE END EXTI0_IRQn 0 */
-  //HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_0);
-	HAL_GPIO_EXTI_IRQHandler(BTN1_Pin);
+  HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_0);
   /* USER CODE BEGIN EXTI0_IRQn 1 */
 
   /* USER CODE END EXTI0_IRQn 1 */
@@ -221,10 +222,11 @@ void EXTI0_IRQHandler(void)
 void EXTI1_IRQHandler(void)
 {
   /* USER CODE BEGIN EXTI1_IRQn 0 */
+	HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_RESET);
+	printf("LED is ON \r\n"); // Катод подключен к PC13, а анод к питанию +3.3В.
 
   /* USER CODE END EXTI1_IRQn 0 */
-  //HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_1);
-	HAL_GPIO_EXTI_IRQHandler(BTN2_Pin);
+  HAL_GPIO_EXTI_IRQHandler(GPIO_PIN_1);
   /* USER CODE BEGIN EXTI1_IRQn 1 */
 
   /* USER CODE END EXTI1_IRQn 1 */

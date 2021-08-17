@@ -91,17 +91,18 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
-  int n = 10;
+
   //while (i < 1000)
-  for (int i = 0; n; i++)
+  for (int i = 0; i<=10; i++)
   {
     /* USER CODE END WHILE */
+
+    /* USER CODE BEGIN 3 */
 		printf("Hello World! %d \n", i);
-		if (i == n) {
+		if (i == 10) {
 			i = 0;
 		}
 		HAL_Delay(500);
-    /* USER CODE BEGIN 3 */
 
   }
   /* USER CODE END 3 */
@@ -186,6 +187,9 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+
+/* Этот Callback закоментировал т.к. прописал в файле stm32f1xx_it.c в функции void EXTI0_IRQHandler(void) и void EXTI1_IRQHandler(void)
+
 void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
   if(GPIO_Pin==BTN1_Pin) {
     HAL_GPIO_WritePin(LED_GPIO_Port, LED_Pin, GPIO_PIN_SET);
@@ -197,6 +201,7 @@ void HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin){
     __NOP(); //ничего не делаем
   }
 }
+*/
 /* USER CODE END 4 */
 
  /**
