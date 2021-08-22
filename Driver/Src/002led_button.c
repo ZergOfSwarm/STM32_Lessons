@@ -52,6 +52,7 @@ int main(void)
 			GPIO_ToggleOutputPin(GPIOA,GPIO_PIN_NO_1);
 		}
 	}
+
 	return 0;
 
 }

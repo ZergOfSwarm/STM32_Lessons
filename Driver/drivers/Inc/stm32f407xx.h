@@ -11,6 +11,32 @@
 #include<stdint.h>  // Без него будет ругаться на uint32_t и т.п.
 #define __vo volatile
 
+/******************************START:Processor Specific Details**************************/
+/*
+ * ARM Cortex Mx Processor NVIC ISERx register Addresses (Interrupt Set-enable Registers)
+ */
+#define NVIC_ISER0         ((__vo uint32_t*)0xE000E100)       // Cortex -M4 Devices TM Generic User Guide -> Table 4-2 NVIC register summary
+#define NVIC_ISER1         ((__vo uint32_t*)0xE000E104)
+#define NVIC_ISER2         ((__vo uint32_t*)0xE000E108)
+#define NVIC_ISER3         ((__vo uint32_t*)0xE000E10c)
+//#define NVIC_ISER4         ((__vo uint32_t)xxxxxxxxx)
+//#define NVIC_ISER5         ((__vo uint32_t)xxxxxxxxx)
+//#define NVIC_ISER6         ((__vo uint32_t)xxxxxxxxx)
+/*
+ * ARM Cortex Mx Processor NVIC ICERx register Addresses (Interrupt Clear-enable Registers)
+ */
+#define NVIC_ICER0         ((__vo uint32_t*)0XE000E180)       // Cortex -M4 Devices TM Generic User Guide -> Table 4-2 NVIC register summary
+#define NVIC_ICER1         ((__vo uint32_t*)0XE000E184)
+#define NVIC_ICER2         ((__vo uint32_t*)0XE000E188)
+#define NVIC_ICER3         ((__vo uint32_t*)0XE000E18C)
+
+/*
+ * ARM Cortex Mx Processor NVIC Interrupt Priority Registers Address Calculation
+ */
+#define NVIC_PR_BASE_ADDR ((__vo uint32_t*)0xE000E400)
+
+#define NO_PR_BITS_IMPLEMENTED  4
+
 // 1. Defining base address of Flash, Sram's, ROM, etc.
 #define FLASH_BASEADDR 0x08000000U           // Main memory. RM Table 5. -> Table 3. Memory mapping vs. Boot mode/physical remap in STM32F405xx/07xx and STM32F415xx/17xx
 #define SRAM1_BASEADDR 0x20000000U           // 112 KB RM -> Table 3. Memory mapping vs. Boot mode/physical remap in STM32F405xx/07xx and STM32F415xx/17xx
@@ -53,7 +79,7 @@
 #define SPI1_BASEADDR   (APB2PERIPH_BASEADDR + 0x3000)
 #define USART1_BASEADDR (APB2PERIPH_BASEADDR + 0x1000)
 #define USART6_BASEADDR (APB2PERIPH_BASEADDR + 0x1400)
-#define EXTI_BASEADDR   (APB2PERIPH_BASEADDR + 0x3C00)
+#define EXTI_BASEADDR   (APB2PERIPH_BASEADDR + 0x3C00) // RM -> Table 1. STM32F4xx register boundary addresses (continued)
 #define SYSCFG_BASEADDR (APB2PERIPH_BASEADDR + 0x3800)
 
 
@@ -108,6 +134,28 @@ typedef struct        // RM -> Table 33. RCC register map and reset values for S
 
 } RCC_RegDef_t; // Дали название нашей структуре.
 
+// peripherak definitions (Peripheral base address typecasted to xxx_RegDef_t)
+// RM -> Table 63. External interrupt/event controller register map and reset values
+typedef struct {
+	__vo uint32_t IMR;   /*!< TODO,                         Address offset: 0x00  */
+	__vo uint32_t EMR;   /*!< TODO,                         Address offset: 0x04  */
+	__vo uint32_t RTSR;  /*!< TODO,                         Address offset: 0x08  */
+	__vo uint32_t FTSR;  /*!< TODO,                         Address offset: 0x0c  */
+	__vo uint32_t SWIER; /*!< TODO,                         Address offset: 0x10  */
+	__vo uint32_t PR;    /*!< TODO,                         Address offset: 0x14  */
+} EXTI_RegDef_t;
+
+// peripherak definitions (Peripheral base address typecasted to xxx_RegDef_t)
+// RM -> SYSCFG register maps for STM32F42xxx and STM32F43xxx
+typedef struct {
+	__vo uint32_t MEMRMP;     /*!< TODO,                    Address offset: 0x00      */
+	__vo uint32_t PMC;        /*!< TODO,                    Address offset: 0x04      */
+	__vo uint32_t EXTICR[4];  /*!< TODO,                    Address offset: 0x8-0x14  */
+	uint32_t RESERVED1[2];   /*!< TODO,                     Address offset: 0x18-0x1c */
+	__vo uint32_t CMPCR;      /*!< TODO,                    Address offset: 0x20      */
+	uint32_t RESERVED2[2];   /*!< TODO,                     Address offset: 0x24-0x28 */ // В моей таблице нет этого!
+	__vo uint32_t CFGR;      /*!< TODO,                    Address offset: 0x2c       */ // В моей таблице нет этого!
+} SYSCFG_RegDef_t;
 
 //6. Peripheral definitions (Peripheral base address typecasted to xxx_RegDef_t)
 #define GPIOA ((GPIO_RegDef_t*)GPIOA_BASEADDR)
@@ -121,6 +169,10 @@ typedef struct        // RM -> Table 33. RCC register map and reset values for S
 #define GPIOI ((GPIO_RegDef_t*)GPIOI_BASEADDR)
 
 #define RCC ((RCC_RegDef_t*)RCC_BASEADDR)
+
+#define EXTI ((EXTI_RegDef_t*)EXTI_BASEADDR)
+
+#define SYSCFG ((SYSCFG_RegDef_t*)SYSCFG_BASEADDR)
 
 // Clock Enable Macros for GPIOx EN peripherals см. RM -> RCC AHB1 peripheral clock register (RCC_AHB1ENR)
 #define GPIOA_PCLK_EN() (RCC->AHB1ENR |= (1 << 0))
@@ -191,6 +243,47 @@ typedef struct        // RM -> Table 33. RCC register map and reset values for S
 #define GPIOG_REG_RESET()   do{(RCC->AHB1RSTR |= (1 << 6)); (RCC->AHB1RSTR &= ~(1 << 6)); }while(0)
 #define GPIOH_REG_RESET()   do{(RCC->AHB1RSTR |= (1 << 7)); (RCC->AHB1RSTR &= ~(1 << 7)); }while(0)
 #define GPIOI_REG_RESET()   do{(RCC->AHB1RSTR |= (1 << 8)); (RCC->AHB1RSTR &= ~(1 << 8)); }while(0)
+
+// returns port code for given GPIOx base address   Conditional or ternary operators in C:
+#define GPIO_BASEADDR_TO_CODE(x)    ( (x == GPIOA)?0:\
+		                              (x == GPIOB)?1:\
+				                      (x == GPIOC)?2:\
+			                          (x == GPIOD)?3:\
+			                          (x == GPIOE)?4:\
+			               			  (x == GPIOF)?5:\
+			               			  (x == GPIOG)?6:\
+			                 		  (x == GPIOH)?7:\
+			                 		  (x == GPIOI)?8: 0 )
+		                              // Если X равен GPIOA то 0 иначе если X равен GPIOB то 1 иначе ...
+
+// IRQ(Interrupt Request numbers of MCU) Numbers of STM32F407x MCU см RF -> Table 62. Vector table for STM32F42xxx and STM32F43xxx (continued)
+// Это на стороне процессора включение прерыаний! (NVIC)
+#define IRQ_NO_EXTI0       6
+#define IRQ_NO_EXTI1       7
+#define IRQ_NO_EXTI2       8
+#define IRQ_NO_EXTI3       9
+#define IRQ_NO_EXTI4       10
+#define IRQ_NO_EXTI9_5     23
+#define IRQ_NO_EXTI15_10   40
+
+// Macros for all the possible priority levels
+#define NVIC_IRQ_PRI0   0
+#define NVIC_IRQ_PRI1   1
+#define NVIC_IRQ_PRI2   2
+#define NVIC_IRQ_PRI3   3
+#define NVIC_IRQ_PRI4   4
+#define NVIC_IRQ_PRI5   5
+#define NVIC_IRQ_PRI6   6
+#define NVIC_IRQ_PRI7   7
+#define NVIC_IRQ_PRI8   8
+#define NVIC_IRQ_PRI9   9
+#define NVIC_IRQ_PRI10   10
+#define NVIC_IRQ_PRI11   11
+#define NVIC_IRQ_PRI12   12
+#define NVIC_IRQ_PRI13   13
+#define NVIC_IRQ_PRI14   14
+#define NVIC_IRQ_PRI15   15
+
 
 // Эти макросы пишем здесь т.к. этот файл виден из любого драйвера в данном проекте!
 #define ENABLE          1       // Это параметр для GPIO_PeriClockControl (в файле stm32f407_gpio_driver.h)

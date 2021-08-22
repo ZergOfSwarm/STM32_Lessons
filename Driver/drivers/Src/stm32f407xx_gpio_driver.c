@@ -87,7 +87,36 @@ void GPIO_Init(GPIO_Handel_t *pGPIOHandle) // This is API for initialisation GPI
 		pGPIOHandle->pGPIOx->MODER |= temp; // Setting значение temp в регистр! Где pGPIOHandle->pGPIOx - это Base address
 	}else
 	{
+		// Interrupt mode
+		if(pGPIOHandle->GPIO_PinConfig.GPIO_PinMode == GPIO_MODE_IT_FT) // Если у нас режим прерывания Falling adge
+		{
+			//1. configure the FTSR / Настравиваем Falling Triger Set Register (FTSR-Это регистр EXTI!)
+			EXTI->FTSR |= (1 << pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber);
+			//Clear the corresponding RTSR bit. Всегда лучше проверить, что RTSR сброшен!
+			EXTI->RTSR &= ~(1 << pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber);
 
+		}else if (pGPIOHandle->GPIO_PinConfig.GPIO_PinMode == GPIO_MODE_IT_RT) // Если у нас режим прерывания Rising adge
+		{
+			//1. configure the RTSR / Настравиваем Rising Triger Set Register
+			EXTI->RTSR |= (1 << pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber);
+			//Clear the corresponding FTSR bit. Всегда лучше проверить, что FTSR сброшен!
+			EXTI->FTSR &= ~(1 << pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber);
+
+		}else if (pGPIOHandle->GPIO_PinConfig.GPIO_PinMode == GPIO_MODE_IT_RFT) // Если у нас режим прерывания Falling adge и Rising adge
+		{
+			//1. configure the FTSR & RTSR / Настравиваем оба регистра Rising Triger Set Register и Falling Triger Set Register!
+			EXTI->RTSR |= (1 << pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber);
+			EXTI->FTSR |= (1 << pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber);
+		}
+		//2. configure the GPIO port selection in SYSCFG_EXTICR
+		uint8_t temp1 = pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber /4; // см Lesson 11 c 46:00 Master Microcontroller and Embedded Driver Development(MCU1)(1)
+		uint8_t temp2 = pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber %4; // см Lesson 11 c 46:00 Master Microcontroller and Embedded Driver Development(MCU1)(1)
+		uint8_t portcode = GPIO_BASEADDR_TO_CODE(pGPIOHandle->pGPIOx);
+		SYSCFG_PCLK_EN();
+		SYSCFG->EXTICR[temp1] = portcode << (temp2 *4);
+
+		//3. enable the exti enterrupt delivery using IMR(Interrupt mask register)
+		EXTI->IMR |= 1 << pGPIOHandle->GPIO_PinConfig.GPIO_PinNumber;
 	}
 	temp = 0; // И снова инициализируем переменную.
 	// 2. configure the speed
@@ -256,10 +285,65 @@ void GPIO_ToggleOutputPin(GPIO_RegDef_t *pGPIOx, uint8_t PinNumber)
  * @Note
  *
  */
-//IRQ Configuration and ISR handling
-void GPIO_IRQConfig(uint8_t IRQNumber, uint8_t IRQPriority, uint8_t EnorDI)
+//IRQ Configuration and ISR handling см. lesson 11 Master Microcontroller and Embedded Driver Development(MCU1)(1)
+void GPIO_IRQInterruptConfig(uint8_t IRQNumber, uint8_t EnorDi)
 {
+	if(EnorDi == ENABLE)
+	{
+		if(IRQNumber <= 31)
+		{
+			//program ISER0 register (Interrupt Set-enable Registers 0)
+			*NVIC_ISER0 |= (1 << IRQNumber);
+
+		}else if(IRQNumber > 31 && IRQNumber < 64) //32 to 63
+		{
+			//program ISER1 register (Interrupt Set-enable Registers 1)
+			*NVIC_ISER1 |= (1 << (IRQNumber % 32)); // см c01:10 Lesson 11 Master Microcontroller and Embedded Driver Development(MCU1)(1)
+
+		}else if(IRQNumber > 64 && IRQNumber < 96)
+		{
+			//program ISER2 register 64 to 95 (Interrupt Set-enable Registers 2)
+			*NVIC_ISER3 |= (1 << (IRQNumber % 64));
+		}
+	}else
+	{
+		if(IRQNumber <= 31)
+		{
+			//program ICER0 register (Interrupt Clear-enable Registers 0)
+			*NVIC_ISER0 |= (1 << IRQNumber);
+
+		}else if(IRQNumber > 31 && IRQNumber < 64)
+		{
+			//program ICER1 register (Interrupt Clear-enable Registers 0)
+			*NVIC_ISER1 |= (1 << IRQNumber % 32);
+
+	    }else if(IRQNumber >= 6 && IRQNumber < 96)
+	    {
+			//program ICER3 register (Interrupt Clear-enable Registers 0)
+			*NVIC_ISER3 |= (1 << IRQNumber % 64);
+	    }
 	}
+}
+/***************************************************************************
+ * @Function name
+ * @brief description
+ * @param[in]
+ * @param[in]
+ * @param[in]
+ *
+ *  @return
+ *
+ * @Note
+ *
+ */
+void GPIO_IRQPriorityConfig(uint8_t IRQNumber,uint8_t IRQPriority)
+{
+	//1. First lets find out the IPR register
+	uint8_t iprx = IRQNumber /4;
+	uint8_t iprx_section = IRQNumber %4;
+	uint8_t shift_amount = (8 * iprx_section) + (8 - NO_PR_BITS_IMPLEMENTED);
+	*(NVIC_PR_BASE_ADDR + iprx*4) |= (IRQPriority << shift_amount);
+}
 /***************************************************************************
  * @Function name
  * @brief description
@@ -274,9 +358,12 @@ void GPIO_IRQConfig(uint8_t IRQNumber, uint8_t IRQPriority, uint8_t EnorDI)
  */
 void GPIO_IRQCHandling(uint8_t PinNumber)
 {
+	// Clear EXTI PR register corresponding to the pin number
+	if(EXTI->PR & (1<< PinNumber))
+	{	//Clear
+		EXTI->PR |= (1<< PinNumber);
 	}
-
-
+}
 
 
 

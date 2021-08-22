@@ -56,9 +56,9 @@ typedef struct
 #define GPIO_MODE_OUT      1
 #define GPIO_MODE_ALTFN    2
 #define GPIO_MODE_ANALOG   3
-#define GPIO_MODE_IT_FT    4 // input falling age
-#define GPIO_MODE_IT_RT    5 // input rising age
-#define GPIO_MODE_IT_RFT   6 // input rising and falling age triger
+#define GPIO_MODE_IT_FT    4 // Прерывания input falling edge detection
+#define GPIO_MODE_IT_RT    5 // Прерывания input rising edge detection
+#define GPIO_MODE_IT_RFT   6 // Прерывания input rising and falling edge detection
 
 // Пишем макросы для всех возможных вариантов output types RM -> GPIO port output type register (GPIOx_OTYPER)
 #define GPIO_OP_TYPE_PP    0 // Push-pull
@@ -87,8 +87,10 @@ uint16_t GPIO_ReadFromInputPort(GPIO_RegDef_t *pGPIOx);
 void GPIO_WriteToOutputPin(GPIO_RegDef_t *pGPIOx, uint8_t PinNumber, uint8_t Value);
 void GPIO_PIO_WriteToOutputPort(GPIO_RegDef_t *pGPIOx, uint16_t Value);
 void GPIO_ToggleOutputPin(GPIO_RegDef_t *pGPIOx, uint8_t PinNumber);
+
 //IRQ Configuration and ISR handling
-void GPIO_IRQConfig(uint8_t IRQNumber, uint8_t IRQPriority, uint8_t EnorDI);
+void GPIO_IRQInterruptConfig(uint8_t IRQNumber, uint8_t EnorDi);
+void GPIO_IRQPriorityConfig(uint8_t IRQNumber,uint8_t IRQPriority);
 void GPIO_IRQCHandling(uint8_t PinNumber);
 
 
