@@ -1,0 +1,9 @@
+uartRingBufDMA.c:39:6:Ringbuf_Init	8	static
+uartRingBufDMA.c:53:6:Ringbuf_Reset	8	static
+uartRingBufDMA.c:68:9:checkString	32	static
+uartRingBufDMA.c:109:9:isConfirmed	16	static
+uartRingBufDMA.c:124:5:waitFor	24	static
+uartRingBufDMA.c:197:5:copyUpto	40	static
+uartRingBufDMA.c:254:5:getAfter	32	static
+uartRingBufDMA.c:273:6:getDataFromBuffer	56	static
+uartRingBufDMA.c:335:6:HAL_UARTEx_RxEventCallback	24	static
