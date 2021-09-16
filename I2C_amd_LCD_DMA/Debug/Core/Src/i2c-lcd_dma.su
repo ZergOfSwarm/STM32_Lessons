@@ -1,0 +1,6 @@
+i2c-lcd_dma.c:9:7:lcd_send_cmd	24	static
+i2c-lcd_dma.c:42:8:lcd_send_data	24	static
+i2c-lcd_dma.c:76:8:lcd_clear	16	static
+i2c-lcd_dma.c:85:8:lcd_put_cur	16	static
+i2c-lcd_dma.c:101:8:lcd_init	8	static
+i2c-lcd_dma.c:127:8:lcd_send_string	16	static
