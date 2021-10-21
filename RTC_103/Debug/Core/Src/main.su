@@ -1,0 +1,7 @@
+main.c:68:6:HAL_RTC_AlarmAEventCallback	16	static
+main.c:79:5:main	16	static
+main.c:134:6:SystemClock_Config	88	static
+main.c:181:13:MX_RTC_Init	24	static
+main.c:249:13:MX_USART2_UART_Init	8	static
+main.c:282:13:MX_GPIO_Init	24	static
+main.c:300:6:Error_Handler	4	static,ignoring_inline_asm
