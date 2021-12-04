@@ -1,0 +1,7 @@
+SX1278_hw.c:14:13:SX1278_hw_init	16	static
+SX1278_hw.c:19:13:SX1278_hw_SetNSS	16	static
+SX1278_hw.c:24:13:SX1278_hw_Reset	16	static
+SX1278_hw.c:35:13:SX1278_hw_SPICommand	16	static
+SX1278_hw.c:42:16:SX1278_hw_SPIReadByte	32	static
+SX1278_hw.c:53:13:SX1278_hw_DelayMs	16	static
+SX1278_hw.c:57:12:SX1278_hw_GetDIO0	16	static
