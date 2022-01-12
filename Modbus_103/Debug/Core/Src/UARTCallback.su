@@ -1,0 +1,4 @@
+UARTCallback.c:24:6:HAL_UART_TxCpltCallback	32	static,ignoring_inline_asm
+UARTCallback.c:60:6:HAL_UART_RxCpltCallback	40	static,ignoring_inline_asm
+UARTCallback.c:101:6:HAL_UART_ErrorCallback	24	static
+UARTCallback.c:127:6:HAL_UARTEx_RxEventCallback	32	static,ignoring_inline_asm
