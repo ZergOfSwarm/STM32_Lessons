@@ -262,7 +262,7 @@ int main(void)
   		if(strstr(buf, "RING") != NULL) // ЕСЛИ ЭТО ЗВОНОК
   		{
   			//if(strstr(buf, "9834567891") != NULL) // если звонит нужный номер
-  			if(strstr(buf, "358468115905") != NULL) // если звонит нужный номер
+  			if(strstr(buf, "358XXXXXXXXX") != NULL) // если звонит нужный номер
   			{
   				// что-то делаем
   				HAL_UART_Transmit(DEBUG, (uint8_t*)"My number\n", strlen("My number\n"), 1000);
@@ -278,7 +278,7 @@ int main(void)
   		else if(strstr(buf, "+CMT:") != NULL) // ЕСЛИ ЭТО SMS
   		{
   			//if(strstr(buf, "9815555596") != NULL) // проверяем от кого смс
-  			if(strstr(buf, "358468115905") != NULL) // проверяем от кого смс
+  			if(strstr(buf, "358XXXXXXXXX") != NULL) // проверяем от кого смс
   			{
   				HAL_UART_Transmit(DEBUG, (uint8_t*)"Sms my number\n", strlen("Sms my number\n"), 1000);
 
