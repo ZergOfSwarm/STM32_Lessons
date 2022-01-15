@@ -67,7 +67,7 @@ int _write(int file, char *ptr, int len) {
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
 uint8_t buf[30] = {0};
-char mobile[] = "+358468115905";  // Enter Your Mobile Number here
+char mobile[] = "+7XXXXXXXXXXXX";  // Enter Your Mobile Number here
 /* USER CODE END 0 */
 
 /**
