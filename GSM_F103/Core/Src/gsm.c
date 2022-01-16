@@ -127,7 +127,7 @@ void disable_connection(void)
 void call(void)
 {
 	//char ATD[] = "ATD+79819555551;\r\n"; // позвонить
-	char ATD[] = "ATD+358468115905;\r\n"; // позвонить
+	char ATD[] = "ATD+358XXXXXXXXXX;\r\n"; // позвонить
 	HAL_UART_Transmit(GSM, (uint8_t*)ATD, strlen(ATD), 1000);
 }
 
