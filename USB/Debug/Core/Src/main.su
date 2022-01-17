@@ -1,0 +1,5 @@
+main.c:76:6:CDC_HANDLE	16	static
+main.c:111:5:main	8	static
+main.c:161:6:SystemClock_Config	88	static
+main.c:205:13:MX_GPIO_Init	48	static
+main.c:235:6:Error_Handler	4	static,ignoring_inline_asm
