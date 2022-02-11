@@ -1,0 +1,4 @@
+udpClientRAW.c:42:6:HAL_TIM_PeriodElapsedCallback	16	static
+udpClientRAW.c:58:6:udpClient_connect	24	static
+udpClientRAW.c:86:13:udpClient_send	120	static
+udpClientRAW.c:110:6:udp_receive_callback	24	static
