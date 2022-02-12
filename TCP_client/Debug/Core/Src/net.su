@@ -1,0 +1,14 @@
+net.c:40:6:tcp_client_connect	16	static
+net.c:54:13:tcp_client_connection_close	16	static
+net.c:68:14:tcp_client_connected	40	static
+net.c:106:14:tcp_client_recv	32	static
+net.c:144:13:tcp_client_send	24	static
+net.c:165:14:tcp_client_sent	32	static
+net.c:175:14:tcp_client_poll	24	static
+net.c:198:6:net_ini	4	static
+net.c:206:10:port_extract	32	static
+net.c:219:6:ip_extract	48	static
+net.c:250:6:net_cmd	48	static
+net.c:288:6:sendstring	24	static
+net.c:297:6:string_parse	16	static
+net.c:320:6:UART6_RxCpltCallback	16	static
