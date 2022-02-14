@@ -14,7 +14,7 @@
 #include "lwip/apps/httpd.h"
 
 #include "stm32f4xx_hal.h"
-
+/************************ SSI HANDLER ***************************/
 int indx = 0;
 /* we will use character "x", "y","z" as tag for SSI */
 char const* TAGCHAR[]={"x", "y", "z"};
@@ -47,14 +47,14 @@ uint16_t ssi_handler (int iIndex, char *pcInsert, int iInsertLen)
 
 /************************ CGI HANDLER ***************************/
 const char *CGIForm_Handler(int iIndex, int iNumParams, char *pcParam[], char *pcValue[]);
-const char *CGILED_Handler(int iIndex, int iNumParams, char *pcParam[], char *pcValue[]);
+//const char *CGILED_Handler(int iIndex, int iNumParams, char *pcParam[], char *pcValue[]); // 1. For LED
 
-const tCGI FORM_CGI = {"/form.cgi", CGIForm_Handler};
-const tCGI LED_CGI = {"/led.cgi", CGILED_Handler};
+const tCGI FORM_CGI = {"/form.cgi", CGIForm_Handler}; // Создаем структуру CGI
+//const tCGI LED_CGI = {"/led.cgi", CGILED_Handler}; // 2. For LED создаем структуру CGI
 
 char name[30];
 
-tCGI CGI_TAB[2];
+//tCGI CGI_TAB[2]; // 3. For LED создадим массив для LED CGI
 
 
 const char *CGIForm_Handler(int iIndex, int iNumParams, char *pcParam[], char *pcValue[])
@@ -79,7 +79,7 @@ const char *CGIForm_Handler(int iIndex, int iNumParams, char *pcParam[], char *p
 
 	return "/cgiform.html";
 }
-
+/************************ END CGI HANDLER ***************************/
 
 const char *CGILED_Handler(int iIndex, int iNumParams, char *pcParam[], char *pcValue[])
 {
@@ -93,9 +93,9 @@ const char *CGILED_Handler(int iIndex, int iNumParams, char *pcParam[], char *pc
 				strcpy(name, pcValue[i]);
 			}
 
-			else if (strcmp(pcParam[i], "lname") == 0)  // if the fname string is found
+			else if (strcmp(pcParam[i], "lname") == 0)  // if the lname string is found
 			{
-				strcat(name, " ");
+				strcat(name, " "); // Сконкатенируем fname и lname разделяя пробелом.
 				strcat(name, pcValue[i]);
 			}
 		}
@@ -109,10 +109,10 @@ void http_server_init (void)
 	httpd_init();
 
 	http_set_ssi_handler(ssi_handler, (char const**) TAGS, 3);
+	// 4. For LED Перед созданиме CGI_handle нам нужно назначить
+	//CGI_TAB[0] = FORM_CGI; // CGI структуру
+	//CGI_TAB[1] = LED_CGI;  // в массив
 
-	CGI_TAB[0] = FORM_CGI;
-	CGI_TAB[1] = LED_CGI;
-
-//	http_set_cgi_handlers (&FORM_CGI, 1);
-	http_set_cgi_handlers (CGI_TAB, 2);
+	http_set_cgi_handlers (&FORM_CGI, 1);
+//	http_set_cgi_handlers (CGI_TAB, 2); // 5. И теперь мы передадим структуру массива в CGI_handle!
 }
