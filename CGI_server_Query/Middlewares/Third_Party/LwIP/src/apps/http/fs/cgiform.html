@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+
+ <head>
+   <title>test</title>
+   <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+ </head>
+
+<body>
+
+   
+
+  <h2>CGI POST</h2>
+
+  <form id="my_form_id1">
+    <label for="fname">First name:</label><br>
+    <input type="text" id="fname" name="fname" value="John"><br>
+    <label for="lname">Last name:</label><br>
+    <input type="text" id="lname" name="lname" value="Doe"><br><br>
+    <input type="submit" value="Submit">
+  </form>
+    <div id="myres">
+
+    </div>
+
+   <div id="myres1">
+
+   </div>
+  
+   <script>
+            $(document).ready(function(){
+                $('#my_form_id1').on('submit', function(e){        
+
+                    e.preventDefault();
+                    var fname = $('#fname').val();
+                    var lname = $('#lname').val();
+                    $.ajax({
+                        type: "GET",
+                        url: 'form.cgi',
+                        data: {fname: fname, lname: lname},
+                        success: function(data){
+                            $('#myres').html(data).show();
+                        }
+                    });
+                });
+            });
+ </script>
+ <script>         
+            function autoRefresh(){
+                    $.ajax({
+                        type: "GET",
+                        url: '2.shtml',
+                        data: {},
+                        success: function(data){
+                            $('#myres1').html(data).show();
+                        }
+                    });
+                setTimeout(autoRefresh, 100);
+            }
+           autoRefresh();
+ </script>
+
+
+
+
+<br><br><br><br><br><br><br>
+<script type="text/javascript">
+        document.write(Date());    
+</script>
+
+</body>
+</html>

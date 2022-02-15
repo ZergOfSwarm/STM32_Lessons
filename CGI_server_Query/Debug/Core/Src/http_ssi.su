@@ -1,0 +1,4 @@
+http_ssi.c:24:10:ssi_handler	24	static
+http_ssi.c:65:13:CGIForm_Handler	32	static
+http_ssi.c:89:13:CGI_LEDs_Handler	32	static
+http_ssi.c:112:6:http_server_init	8	static
