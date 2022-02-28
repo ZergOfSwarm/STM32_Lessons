@@ -1,0 +1,16 @@
+http_ssi.c:33:10:ssi_handler	24	static
+http_ssi.c:66:13:CGIForm_Handler	32	static
+http_ssi.c:124:1:find_header_name	24	static
+http_ssi.c:144:1:find_boundary	24	static
+http_ssi.c:187:5:read_header_name	32	static
+http_ssi.c:204:5:read_header_value	24	static
+http_ssi.c:215:5:read_part_data	24	static
+http_ssi.c:224:5:read_on_part_data_begin	24	static
+http_ssi.c:234:5:read_on_headers_complete	24	static
+http_ssi.c:245:5:read_on_part_data_end	24	static
+http_ssi.c:254:5:read_on_body_end	24	static
+http_ssi.c:264:1:http_parse_post	16	static
+http_ssi.c:297:1:httpd_post_begin	32	static
+http_ssi.c:348:1:httpd_post_receive_data	32	static
+http_ssi.c:377:1:httpd_post_finished	32	static
+http_ssi.c:396:6:http_server_init	8	static
