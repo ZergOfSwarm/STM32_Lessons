@@ -1,0 +1,121 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="styles.css">
+    <title>Таблица</title>
+    <style>
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 5px;
+        }
+
+        tr:nth-child(odd) {
+            background-color: #CCFFCC;
+        }
+    </style>
+</head>
+<!--*************************************************************-->
+
+<!--*************************************************************-->
+
+<body>
+    <form action="form.cgi" method="post">
+        <button type="Reset">Reset</button>
+        <button> Submit </button>
+        <!--Укажи правильное значение для кнопки "Update settings"-->
+        <table class="zebra" border="1" align="center" width="100%">
+            <style>
+                h1 {
+                    font-family: Verdana, Arial, Helvetica, sans-serif;
+                    /* Рубленый шрифт заголовка */
+                }
+
+                p {
+                    font-family: 'Times New Roman', Times, serif;
+                    /* Шрифт с засечками */
+                    font-style: italic;
+                    /* Курсивное начертание */
+                }
+            </style>
+            <caption>
+                <h1>STM32F407VG</h1>
+            </caption>
+            <tr>
+                <th>ID</th>
+                <th>Pin</th>
+                <th>Pullup type</th>
+                <th>Bounce interval (ms)</th>
+                <th>Hold interval (ms)</th>
+                <th>Repeat</th>
+                <th>Repeat interval (ms)</th>
+                <th>Double-click interval (ms)</th>
+                <th>Prevent Click</th>
+                <th>!DELETE!</th>
+                <th>On/Off</th>
+            </tr>
+            <tr>
+                <td style="text-align: center; vertical-align: middle;">1</td>
+                <td style="text-align: center; vertical-align: middle;">PD0</td>
+                <td class="dropdown" align="center">
+                    <!--
+                    <select name="filter_for">
+                        <option value="EXTERNAL_PULLDOWN">EXTERNAL_PULLDOWN</option>
+                        <option value="INTERNAL_PULLUP">INTERNAL_PULLUP</option>
+                        <option value="EXTERNAL_PULLUP">EXTERNAL_PULLUP</option>
+                    </select>
+
+-->
+                    <!--**********************INPUT************ placeholder="" / value="1" *********************-->
+                <td align="center">
+                    <label for="name"></label>
+                    <input type="number" id="Bounce_interval" name="Bounce_interval" required minlength="1"
+                        maxlength="8" size="10" value="1">
+                </td>
+                <td align="center">
+                    <label for="name"></label>
+                    <input type="number" id="Hold_interval" name="Hold_interval" required minlength="1" maxlength="8"
+                        size="10" value="2">
+                </td>
+                <td align="center">
+                    <label for="name"></label>
+                    <input type="number" id="Repeat" name="Repeat" required minlength="1" maxlength="8" size="10"
+                        value="3">
+                </td>
+                <td align="center">
+                    <label for="name"></label>
+                    <input type="number" id="Repeat_interval" name="Repeat_interval" required minlength="1"
+                        maxlength="8" size="10" value="4">
+                </td>
+                <td align="center">
+                    <label for="name"></label>
+                    <input type="number" id="Double_click_interval" name="Double_click_interval" required minlength="1"
+                        maxlength="8" size="10" value="5">
+                </td>
+                <td align="center">
+                    <label for="name"></label>
+                    <input type="number" id="Prevent_Click" name="Prevent_Click" required minlength="1" maxlength="8"
+                        size="10" value="6">
+                </td>
+                <!--***********************SLIDER********************************-->
+                <td style="text-align: center; vertical-align: middle;">Text</td>
+                <td align="center">
+                    <label class="switch">
+                        <input type="checkbox" name="OnOff" value="On" unchecked="unchecked">
+                        <span class="slider round"></span>
+                    </label>
+                </td>
+            </tr>
+
+
+        </table>
+
+    </form>
+
+</body>
+
+</html>
