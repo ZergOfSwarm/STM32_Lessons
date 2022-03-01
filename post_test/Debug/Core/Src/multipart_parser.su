@@ -1,6 +1,0 @@
-multipart_parser.c:12:13:multipart_log	4	static
-multipart_parser.c:80:19:multipart_parser_init	32	static
-multipart_parser.c:99:6:multipart_parser_free	16	static
-multipart_parser.c:103:6:multipart_parser_set_data	16	static
-multipart_parser.c:107:7:multipart_parser_get_data	16	static
-multipart_parser.c:111:8:multipart_parser_execute	40	static
