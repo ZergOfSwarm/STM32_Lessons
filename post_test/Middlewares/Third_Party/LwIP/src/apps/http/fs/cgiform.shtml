@@ -1,0 +1,66 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="styles.css">
+    <title>Таблица</title>
+    <style>
+        table,
+        th,
+        td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 5px;
+        }
+
+        tr:nth-child(odd) {
+            background-color: #CCFFCC;
+        }
+    </style>
+</head>
+
+<body>
+    <form action="form.cgi" method="post">
+        <button type="Reset">Reset</button>
+        <button> Save config </button>
+        <!--Укажи правильное значение для кнопки "Update settings"-->
+        <table class="zebra" border="1" align="center" width="100%">
+            <style>
+                h1 {
+                    font-family: Verdana, Arial, Helvetica, sans-serif;
+                    /* Рубленый шрифт заголовка */
+                }
+
+                p {
+                    font-family: 'Times New Roman', Times, serif;
+                    /* Шрифт с засечками */
+                    font-style: italic;
+                    /* Курсивное начертание */
+                }
+            </style>
+            <caption>
+                <h1>STM32F407VG</h1>
+            </caption>
+            <tr>
+                <th>ID</th>
+                <th>Pin</th>
+                <th>Pullup type</th>
+                <th>Bounce interval (ms)</th>
+                <th>Hold interval (ms)</th>
+                <th>Repeat</th>
+                <th>Repeat interval (ms)</th>
+                <th>Double-click interval (ms)</th>
+                <th>Prevent Click</th>
+                <th>INFO</th>
+                <th>On/Off</th>
+            </tr>
+
+            <!--#tab-->
+        </table>
+
+    </form>
+
+</body>
+
+</html>
