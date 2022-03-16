@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title> SSI TEST </title>
+<meta http-equiv="refresh" content ="1">
+</head>
+<style>
+table, th, td {
+  border:1px solid black;
+}
+</style>
+<body>
+
+<h2>TEST PAGE FOR SSI</h2>
+
+<table style="width:100%">
+  <tr>
+    <td>V1</td>
+    <td>V2</td>
+    <td>V3</td>
+  </tr>
+  <tr>
+    <td><!--#x--></td>
+    <td><!--#y--></td>
+    <td><!--#z--></td>
+  </tr>
+</table>
+
+<p>This page refreshes every 1 second.</p>
+
+</body>
+</html>
