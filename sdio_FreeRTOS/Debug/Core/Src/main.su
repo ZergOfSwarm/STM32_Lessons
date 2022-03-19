@@ -1,0 +1,13 @@
+core_cm4.h:2064:26:ITM_SendChar	16	static,ignoring_inline_asm
+main.c:86:5:_write	32	static
+main.c:105:5:main	8	static
+main.c:195:6:SystemClock_Config	88	static
+main.c:236:13:MX_SDIO_SD_Init	4	static
+main.c:263:13:MX_USART6_UART_Init	8	static
+main.c:292:13:MX_DMA_Init	16	static
+main.c:312:13:MX_GPIO_Init	24	static
+main.c:332:6:StartDefaultTask	16	static
+main.c:348:6:Start_Blink_Task	40	static
+main.c:384:6:Start_SDIO_Task	24	static
+main.c:420:6:HAL_TIM_PeriodElapsedCallback	16	static
+main.c:436:6:Error_Handler	4	static,ignoring_inline_asm
