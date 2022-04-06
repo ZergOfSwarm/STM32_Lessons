@@ -1,0 +1,4 @@
+httpsserver_netconn.c:55:7:httpserver_send_html	24	static
+httpsserver_netconn.c:74:14:httpserver_serve	32	static
+httpsserver_netconn.c:130:2:httpserver_thread	32	static
+httpsserver_netconn.c:168:2:httpserver_init	16	static
