@@ -1,0 +1,15 @@
+zagotovka_sdio.c:32:6:clear_buffer	16	static
+zagotovka_sdio.c:38:6:zerg_mount	8	static
+zagotovka_sdio.c:47:6:zerg_format	24	static
+zagotovka_sdio.c:61:6:zerg_open	8	static
+zagotovka_sdio.c:72:6:zerg_write	8	static
+zagotovka_sdio.c:87:6:zerg_read	8	static
+zagotovka_sdio.c:106:5:zerg_get_data_from_sd	48	static
+zagotovka_sdio.c:192:6:zerg_write_data_to_sd	15224	static
+zagotovka_sdio.c:244:6:zerg_add_data	16	static
+zagotovka_sdio.c:270:6:zerg_creat_folder	16	static
+zagotovka_sdio.c:313:9:zerg_scan_files	32	static
+zagotovka_sdio.c:358:6:zerg_ummount	8	static
+zagotovka_sdio.c:372:6:zerg_delete	16	static
+zagotovka_sdio.c:395:6:zerg_get_free_space	8	static
+zagotovka_sdio.c:408:6:zerg_get_file_info	32	static

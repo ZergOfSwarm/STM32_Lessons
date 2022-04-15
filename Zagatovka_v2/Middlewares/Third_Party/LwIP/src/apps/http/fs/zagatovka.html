@@ -1,0 +1,100 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title>Таблица</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <style>
+    table,
+    th,
+    td {
+      border: 1px solid black;
+      border-collapse: collapse;
+      padding: 5px;
+    }
+
+    tr:nth-child(odd) {
+      background-color: #CCFFCC;
+    }
+  </style>
+</head>
+
+<body>
+  <form action="zagatovka.html?go=1" method="get">
+    <!--Укажи правильное значение для кнопки "Update settings" width="100%"-->
+    <table class="zebra" border="1" align="center" id="tab1">
+      <style>
+        h1 {
+          font-family: Verdana, Arial, Helvetica, sans-serif;
+          /* Рубленый шрифт заголовка */
+        }
+
+        p {
+          font-family: 'Times New Roman', Times, serif;
+          /* Шрифт с засечками */
+          font-style: italic;
+          /* Курсивное начертание */
+        }
+
+        .firstline {
+          width: 10px;
+        }
+      </style>
+      <caption>
+        <h1>'DevEBox' - STM32F407VG</h1>
+      </caption>
+      <tr>
+        <th>ID</th>
+        <th>Pin</th>
+        <th>Pullup type</th>
+        <th class="firstline">Bounce interval (ms)</th>
+        <th class="firstline">Hold interval (ms)</th>
+        <th class="firstline">Repeat</th>
+        <th class="firstline">Repeat interval (ms)</th>
+        <th class="firstline">Double-click interval (ms)</th>
+        <th class="firstline">Prevent Click</th>
+        <th>INFO</th>
+        <th>On/Off</th>
+        <th>Edit</th>
+      </tr>
+
+    </table>
+
+  </form>
+  <script>
+    $(document).ready(function () {
+      $.getJSON('json.html', function (data) {
+        var employee_data = '';
+        var n = 0;
+        var z = '';
+
+        $.each(data, function (key, val) {
+          employee_data += '<tr>';
+          employee_data += '<td>' + n + '</td>';
+          employee_data += '<td>' + val.pins + '</td>';
+          employee_data += '<td  align=\"center\">' + val.pulluptype + '</td>';
+          employee_data += '<td  align=\"center\">' + val.bounceinterval + '</td>';
+          employee_data += '<td  align=\"center\">' + val.holdinterval + '</td>';
+          employee_data += '<td  align=\"center\">' + val.repeat + '</td>';
+          employee_data += '<td  align=\"center\">' + val.repeatinterval + '</td>';
+          employee_data += '<td  align=\"center\">' + val.doubleclickinterval + '</td>';
+          employee_data += '<td  align=\"center\">' + val.preventclick + '</td>';
+          employee_data += '<td  align=\"center\">' + val.infofield + '</td>';
+          if (val.onoff == 1) {
+            employee_data += '<td><label class=\"switch\"> <input name=\"onoff_' + n + '\" type=\"hidden\" value=\"0\"> <input type=\"checkbox\" name=\"onoff_' + n + '\" value=\"1\" checked=\"checked\"><span class=\"slider round\"></span></label></td>'
+          } else {
+            employee_data += '<td><label class=\"switch\"> <input name=\"onoff_' + n + '\" type=\"hidden\" value=\"0\"> <input type=\"checkbox\" name=\"onoff_' + n + '\" value=\"1\" unchecked=\"unchecked\"><span class=\"slider round\"></span></label></td>'
+          }
+          employee_data += '<td  align=\"center\"> <a href=\"form.html?id=' + n + '\">EDIT</a> </td>';
+          employee_data += '</tr>';
+          n++;
+        });
+        $('#tab1').append(employee_data);
+      });
+    });
+  </script>
+</body>
+
+</html>

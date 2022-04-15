@@ -1,0 +1,5 @@
+zagotovka_netconn.c:75:6:parse	64	dynamic
+zagotovka_netconn.c:107:13:http_server_serve	1024	static
+zagotovka_netconn.c:256:13:http_server_netconn_thread	32	static
+zagotovka_netconn.c:291:6:zagotovka_netconn_init	16	static
+zagotovka_netconn.c:324:6:My_Form_Page	24	static

@@ -1,0 +1,36 @@
+Проблемы с парсингом после отправки формы "GET"!
+[10:12:44:747] Result of Parse - y<0x1c>␍␊
+
+
+
+
+
+
+SD card mounted successfully!␍␊
+[10:12:27:164]  bounceinterval_0 is: 99 ␊
+[10:12:27:164]  holdinterval_0 is: 999 ␊
+[10:12:27:167]  repeat_0 is: 1 ␊
+[10:12:27:171]  repeatinterval_0 is: 999 ␊
+[10:12:27:171]  doubleclickinterval_0 is: 999 ␊
+[10:12:27:174]  preventclick_0 is: 999 ␊
+[10:12:27:177]  infofield_0 is: wwwwwwwwwwwwwwwwwwww ␊
+[10:12:27:180]  onoff_0 is: 0 ␊
+[10:12:27:183]  pulluptype_1 is: GPIO_PULLDOWN ␊
+[10:12:27:186]  bounceinterval_1 is: 99 ␊
+[10:12:27:189]  holdinterval_1 is: 999 ␊
+[10:12:27:192]  repeat_1 is: 1 ␊
+[10:12:27:192]  repeatinterval_1 is: 999 ␊
+[10:12:27:195]  doubleclickinterval_1 is: 999 ␊
+[10:12:27:198]  preventclick_1 is: 9 ␊
+[10:12:39:593]  GET !!!␊
+[10:12:44:709] ␍BUFFER IS - GET /form.html?id=0 HTTP/1.1␍␊
+[10:12:44:712] Host: 192.168.18.111␍␊
+[10:12:44:715] User-Agent: Mozilla/5.0 (X11; Linux x86_64; rv:91.0) Gecko/20100101 Firefox/91.0␍␊
+[10:12:44:722] Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8␍␊
+[10:12:44:731] Accept-Language: en,ru-RU;q=0.8,ru;q=0.5,en-US;q=0.3␍␊
+[10:12:44:734] Accept-Encoding: gzip, deflate␍␊
+[10:12:44:737] Connection: keep-alive␍␊
+[10:12:44:740] Referer: http://192.168.18.111/␍␊
+[10:12:44:744] Upgrade-Insecure-Requests: 1␍␊
+[10:12:44:747] ␍␊
+[10:12:44:747] Result of Parse - y<0x1c>␍␊
