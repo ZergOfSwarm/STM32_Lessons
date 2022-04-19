@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title>Таблица</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <link rel="stylesheet" href="styles.css">
+
+</head>
+
+<body>
+
+  <center>
+    <h1>NUCLEO-F207ZG</h1>
+
+    <a href="index.shtml">Home</a> |
+    <a href="select.shtml">Select pin</a> |
+    <a href="tab1.shtml">Buttom pin</a> |
+    <a href="tab2.shtml">Relay pin</a>
+    <br><br>
+  </center>
+
+
+
+
+</body>
+
+</html>
