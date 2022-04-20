@@ -1,0 +1,96 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title>Таблица</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <link rel="stylesheet" href="styles.css">
+
+</head>
+
+<body>
+
+  <center>
+    <h1>NUCLEO-F207ZG</h1>
+    <a href="index.shtml">Home</a> |
+    <a href="tab1.shtml">Buttom pin</a> |
+    <a href="tab2.shtml">Relay pin</a> |
+    <a href="select.shtml">Select pin</a>
+
+    <h4 id="title1">Edit buttom pin</h4>
+
+  </center>
+
+  <form action="tab1.shtml" method="post">
+    <table class="zebra_3" border="1" align="center" id="tab1">
+
+    </table>
+    <br>
+    <center>
+      <button> Save pin </button>
+    </center>
+  </form>
+
+
+  <script>
+
+
+
+    var response = '<!--#formjson-->';
+
+    $(document).ready(function () {
+
+      var val = JSON.parse(response);
+      var employee_data = '';
+
+      var employee_data_pin = '';
+      employee_data_pin += ' ' + val.pins + ' ';
+
+      employee_data += '<tr><td>ID</td><td>' + val.id + '</td></tr>';
+      employee_data += '<tr><td>Pin</td><td>' + val.pins + '</td></tr>';
+      employee_data += '<tr><td>Pullup type</td>';
+
+      employee_data += '<td><select name=\"ptype_' + val.id + '\">';
+      if (val.ptype == 'GPIO_NOPULL') {
+        employee_data += ' <option value=\"GPIO_NOPULL\" selected>GPIO_NOPULL</option>';
+      } else {
+        employee_data += ' <option value=\"GPIO_NOPULL\">GPIO_NOPULL</option>';
+      }
+      if (val.ptype == 'GPIO_PULLUP') {
+        employee_data += ' <option value=\"GPIO_PULLUP\" selected>GPIO_PULLUP</option>';
+      } else {
+        employee_data += ' <option value=\"GPIO_PULLUP\">GPIO_PULLUP</option>';
+      }
+      if (val.ptype == 'GPIO_PULLDOWN') {
+        employee_data += ' <option value=\"GPIO_PULLDOWN\" selected>GPIO_PULLDOWN</option>';
+      } else {
+        employee_data += ' <option value=\"GPIO_PULLDOWN\">GPIO_PULLDOWN</option>';
+      }
+
+      employee_data += '</select></td></tr>';
+
+      employee_data += '<tr><td>Bounce interval (ms)</td><td><input type=\"number\" name=\"binter_' + val.id + '\" value=\"' + val.binter + '\"  size=\"5\" style=\"width:45px;\"></td></tr>';
+      employee_data += '<tr><td>Hold interval (ms)</td><td><input type=\"number\" name=\"hinter_' + val.id + '\" value=\"' + val.hinter + '\" size=\"5\" style=\"width:45px;\"></td></tr>';
+      employee_data += '<tr><td>Repeat</td><td><input type=\"number\" name=\"repeat_' + val.id + '\" value=\"' + val.repeat + '\" size=\"5\" style=\"width:45px;\"></td></tr>';
+      employee_data += '<tr><td>Repeat interval (ms)</td><td><input type=\"number\" name=\"rinter_' + val.id + '\" value=\"' + val.rinter + '\" size=\"5\" style=\"width:45px;\"></td></tr>';
+      employee_data += '<tr><td>Double-click interval (ms)</td><td><input type=\"number\" name=\"dcinter_' + val.id + '\" value=\"' + val.dcinter + '\" size=\"5\" style=\"width:45px;\"></td></tr>';
+      employee_data += '<tr><td>Prevent Click</td><td><input type=\"number\" name=\"pclick_' + val.id + '\" value=\"' + val.pclick + '\" size=\"5\" style=\"width:45px;\"></td></tr>';
+      employee_data += '<tr><td>INFO</td><td><input type=\"text\" name=\"info_' + val.id + '\" value=\"' + val.info + '\"></td></tr>';
+      if (val.onoff == 1) {
+        employee_data += '<tr><td>On/Off</td><td><label class=\"switch\"> <input name=\"onoff_' + val.id + '\" type=\"hidden\" value=\"0\"> <input type=\"checkbox\" name=\"onoff_' + val.id + '\" value=\"1\" checked=\"checked\"><span class=\"slider round\"></span></label></td></tr>';
+      } else {
+        employee_data += '<tr><td>On/Off</td><td><label class=\"switch\"> <input name=\"onoff_' + val.id + '\" type=\"hidden\" value=\"0\"> <input type=\"checkbox\" name=\"onoff_' + val.id + '\" value=\"1\" unchecked=\"unchecked\"><span class=\"slider round\"></span></label></td></tr>';
+      }
+
+      $('#tab1').append(employee_data);
+      $('#title1').append(employee_data_pin);
+
+
+    });
+
+  </script>
+</body>
+
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title>Таблица</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <link rel="stylesheet" href="styles.css">
+
+</head>
+
+<body>
+
+  <center>
+    <h1>NUCLEO-F207ZG</h1>
+    <a href="index.shtml">Home</a> |
+    <a href="tab1.shtml">Buttom pin</a> |
+    <a href="tab2.shtml">Relay pin</a> |
+    <a href="select.shtml">Select pin</a>
+
+    <h4 id="title1">Edit Relay pin</h4>
+
+  </center>
+
+  <form action="tab2.shtml" method="post">
+    <table class="zebra_2" border="1" align="center" id="tab1">
+
+    </table>
+    <br>
+    <center>
+      <button> Save pin </button>
+    </center>
+  </form>
+
+
+  <script>
+
+
+    var response = '<!--#formjson-->';
+
+    $(document).ready(function () {
+
+      var val = JSON.parse(response);
+      var employee_data = '';
+
+      var employee_data_pin = '';
+      employee_data_pin += ' ' + val.pins + ' ';
+
+      employee_data += '<tr><td>ID</td><td>' + val.id + '</td></tr>';
+      employee_data += '<tr><td>Pin</td><td>' + val.pins + '</td></tr>';
+
+      employee_data += '<tr><td>PWM Frequency (Hz)</td><td><input type=\"number\" name=\"pwm_' + val.id + '\" value=\"' + val.pwm + '\"  size=\"5\" style=\"width:45px;\"></td></tr>';
+      employee_data += '<tr><td>ON)</td><td><input type=\"number\" name=\"on_' + val.id + '\" value=\"' + val.on + '\" size=\"5\" style=\"width:45px;\"></td></tr>';
+      employee_data += '<tr><td>Invert State</td><td><input type=\"number\" name=\"istate_' + val.id + '\" value=\"' + val.istate + '\" size=\"5\" style=\"width:45px;\"></td></tr>';
+      employee_data += '<tr><td>Dimmer value (0-255)</td><td><input type=\"number\" name=\"dvalue_' + val.id + '\" value=\"' + val.dvalue + '\" size=\"5\" style=\"width:45px;\"></td></tr>';
+      employee_data += '<tr><td>Power On Restore)</td><td><input type=\"number\" name=\"ponr_' + val.id + '\" value=\"' + val.ponr + '\" size=\"5\" style=\"width:45px;\"></td></tr>';
+
+      employee_data += '<tr><td>INFO</td><td><input type=\"text\" name=\"info_' + val.id + '\" value=\"' + val.info + '\"></td></tr>';
+      if (val.onoff == 1) {
+        employee_data += '<tr><td>On/Off</td><td><label class=\"switch\"> <input name=\"onoff_' + val.id + '\" type=\"hidden\" value=\"0\"> <input type=\"checkbox\" name=\"onoff_' + val.id + '\" value=\"1\" checked=\"checked\"><span class=\"slider round\"></span></label></td></tr>';
+      } else {
+        employee_data += '<tr><td>On/Off</td><td><label class=\"switch\"> <input name=\"onoff_' + val.id + '\" type=\"hidden\" value=\"0\"> <input type=\"checkbox\" name=\"onoff_' + val.id + '\" value=\"1\" unchecked=\"unchecked\"><span class=\"slider round\"></span></label></td></tr>';
+      }
+
+      $('#tab1').append(employee_data);
+      $('#title1').append(employee_data_pin);
+
+
+    });
+
+  </script>
+</body>
+
+</html>
