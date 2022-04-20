@@ -1,0 +1,13 @@
+zerg_sdio.c:31:6:clear_buffer	16	static
+zerg_sdio.c:38:6:zerg_mount	8	static
+zerg_sdio.c:51:6:zerg_format	24	static
+zerg_sdio.c:69:6:zerg_open	8	static
+zerg_sdio.c:82:6:zerg_write	8	static
+zerg_sdio.c:101:6:zerg_read	8	static
+zerg_sdio.c:127:6:zerg_add_data	16	static
+zerg_sdio.c:158:6:zerg_creat_folder	16	static
+zerg_sdio.c:206:9:zerg_scan_files	32	static
+zerg_sdio.c:251:6:zerg_ummount	8	static
+zerg_sdio.c:262:6:zerg_delete	16	static
+zerg_sdio.c:290:6:zerg_get_free_space	8	static
+zerg_sdio.c:304:6:zerg_get_file_info	32	static
