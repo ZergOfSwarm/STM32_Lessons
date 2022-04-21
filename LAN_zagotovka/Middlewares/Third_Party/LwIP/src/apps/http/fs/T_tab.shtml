@@ -1,0 +1,96 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title>STM32</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <link rel="stylesheet" href="styles.css">
+
+</head>
+
+<body>
+
+
+
+  <center>
+    <h1>'DevEBox' - STM32F407VG</h1>
+
+    <a href="index.shtml">Home</a> |
+    <a href="select.shtml">Select pins</a> |
+    <a href="tab1.shtml">Buttom pins</a> |
+    <a href="tab2.shtml">Relay pins</a> |
+    <a href="T_tab.shtml">Set timer</a>
+
+    <h4>Please, configure a timer.</h4>
+
+  </center>
+
+  <form action="T_tab.shtml" method="post">
+
+
+    <table class="zebra_3" border="1" align="center" id="tab1">
+
+      <tr>
+        <th>ID</th>
+        <th>Pin</th>
+        <th class="firstline">Days of week</th>
+        <th class="firstline">Time</th>
+        <th class="firstline">Hour</th>
+        <th class="firstline">Minutes</th>
+        <th class="firstline">Seconds</th>
+        <th class="firstline">Sunrise</th>
+        <th class="firstline">Sunset</th>
+        <th class="firstline">Longitude</th>
+        <th class="firstline">Latitude</th>
+        <th>Action</th>
+        <th>On/Off</th>
+        <th>Edit</th>
+      </tr>
+
+    </table>
+    <center>
+      <br>
+      <button> Save configuration </button>
+    </center>
+  </form>
+  <script>
+    $(document).ready(function () {
+      $.getJSON('json.shtml?jsongo=4', function (data) {
+        var employee_data = '';
+        var n = 0;
+        var z = '';
+
+        $.each(data, function (key, val) {
+          if (val.topin == 1) {
+            employee_data += '<tr>';
+            employee_data += '<td>' + val.id + '</td>';
+            employee_data += '<td>' + val.pins + '</td>';
+            employee_data += '<td align=\"center\">' + val.dow + '</td>';
+            employee_data += '<td align=\"center\">' + val.tim + '</td>';
+            employee_data += '<td align=\"center\">' + val.hr + '</td>';
+            employee_data += '<td align=\"center\">' + val.min + '</td>';
+            employee_data += '<td align=\"center\">' + val.sec + '</td>';
+            employee_data += '<td align=\"center\">' + val.sr + '</td>';
+            employee_data += '<td align=\"center\">' + val.ss + '</td>';
+            employee_data += '<td align=\"center\">' + val.lat + '</td>';
+            employee_data += '<td align=\"center\">' + val.lon + '</td>';
+            employee_data += '<td>' + val.info + '</td>';
+            if (val.onoff == 1) {
+              employee_data += '<td><label class=\"switch\"> <input name=\"onoff_' + val.id + '\" type=\"hidden\" value=\"0\"> <input type=\"checkbox\" name=\"onoff_' + val.id + '\" value=\"1\" checked=\"checked\"><span class=\"slider round\"></span></label></td>'
+            } else {
+              employee_data += '<td><label class=\"switch\"> <input name=\"onoff_' + val.id + '\" type=\"hidden\" value=\"0\"> <input type=\"checkbox\" name=\"onoff_' + val.id + '\" value=\"1\" unchecked=\"unchecked\"><span class=\"slider round\"></span></label></td>'
+            }
+            employee_data += '<td><a href=\"T_form.shtml?id=' + val.id + '&tab=3\">Edit</a></td>';
+            employee_data += '</tr>';
+          }
+          n++;
+        });
+        $('#tab1').append(employee_data);
+      });
+    });
+  </script>
+</body>
+
+</html>
