@@ -1,0 +1,217 @@
+h1 {
+  font-family: Verdana, Arial, Helvetica, sans-serif;
+  /* Рубленый шрифт заголовка */
+}
+
+p {
+  font-family: 'Times New Roman', Times, serif;
+  /* Шрифт с засечками */
+  font-style: italic;
+  /* Курсивное начертание */
+}
+
+.firstline {
+  width: 10px;
+}
+
+table,
+th,
+td {
+  border: 1px solid black;
+  border-collapse: collapse;
+  padding: 5px;
+}
+
+.zebra tr:nth-child(odd) {
+  background-color: #CCFFCC;
+}
+
+.zebra_2 tr:nth-child(odd) {
+  background-color: #CCFFFF;
+}
+
+.zebra_3 tr:nth-child(odd) {
+  background-color: #FFCCCC;
+}
+
+/*********************SLIDER************************/
+/* The switch - the box around the slider */
+.switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+}
+
+/* Hide default HTML checkbox */
+.switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked+.slider {
+  background-color: #2196F3;
+}
+
+input:focus+.slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked+.slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+
+/********************* Battons menu ************************/
+
+/* The switch - the box around the slider */
+.battons_switch {
+  position: relative;
+  display: inline-block;
+  width: 50px;
+  height: 24px;
+}
+
+/* Hide default HTML checkbox */
+.battons_switch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+/* The slider */
+.battons_slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.battons_slider:before {
+  position: absolute;
+  content: "";
+  height: 16px;
+  width: 16px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked+.battons_slider {
+  background-color: #FF6F00;
+}
+
+input:focus+.battons_slider {
+  box-shadow: 0 0 1px #FF6F00;
+}
+
+input:checked+.battons_slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.battons_slider.round {
+  border-radius: 34px;
+}
+
+.battons_slider.round:before {
+  border-radius: 50%;
+}
+
+/*********************INPUT************************/
+label {
+  display: block;
+  font: 1rem 'Fira Sans', sans-serif;
+}
+
+input,
+label {
+  margin: .4rem 0;
+}
+
+
+/********************* Всплывающая подсказка ************************/
+.tooltip {
+  position: relative;
+  display: inline-block;
+  border-bottom: 1px dotted rgb(0, 0, 0);
+}
+
+.tooltip .tooltiptext {
+  display: none;
+  width: 300px;
+  background-color: #555;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 0;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  margin-left: -150px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #555 transparent transparent transparent;
+}
+
+
+.support:focus .tooltiptext {
+  display: block;
+  opacity: 1;
+}

@@ -1,0 +1,8 @@
+http_ssi.c:105:10:ssi_handler	112	static
+http_ssi.c:377:13:CGIForm_Handler	32	static
+http_ssi.c:392:13:CGIForm_Handler1	32	static
+http_ssi.c:419:13:CGIForm_Handler2	32	static
+http_ssi.c:444:7:httpd_post_begin	24	static
+http_ssi.c:488:7:httpd_post_receive_data	16	static
+http_ssi.c:519:6:httpd_post_finished	1176	static
+http_ssi.c:662:6:http_server_init	8	static
