@@ -1,0 +1,11 @@
+core_cm4.h:2064:26:ITM_SendChar	16	static,ignoring_inline_asm
+main.c:53:5:_write	32	static
+main.c:72:5:main	8	static
+main.c:164:6:SystemClock_Config	88	static
+main.c:208:13:MX_USART6_UART_Init	8	static
+main.c:241:13:MX_GPIO_Init	40	static
+main.c:269:9:MenuButton_Debounce	16	static
+main.c:293:6:setTimer	16	static
+main.c:297:9:checkTimer	24	static
+main.c:313:6:HAL_TIM_PeriodElapsedCallback	16	static
+main.c:330:6:Error_Handler	4	static,ignoring_inline_asm
