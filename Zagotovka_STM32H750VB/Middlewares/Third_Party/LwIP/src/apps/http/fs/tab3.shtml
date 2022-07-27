@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title>Таблица</title>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <link rel="stylesheet" href="styles.css">
+
+</head>
+
+<body>
+
+      <center>
+        <h1>NUCLEO-F207ZG</h1>
+      
+ <!--#menu-->
+
+        <h4>Connection Pin</h4>
+      </center>
+
+  <form action="tab2.shtml" method="post">
+    <table class="zebra" border="1" align="center" id="tab1">
+      <tr>
+        <th>ID Buttom</th>
+        <th>Pin Buttom</th>
+        <th>ID Relay</th>
+        <th>Pin Relay</th>
+        <th>Action</th>
+      </tr>
+
+    </table>
+    <center>
+        <br>
+      
+    </center
+  </form>
+
+
+</body>
+
+</html>
+
+
+
