@@ -1,0 +1,464 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title>Таблица</title>
+  <link type="image/x-icon" rel="shortcut icon" href="favicon.ico">
+
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <link rel="stylesheet" href="styles.css">
+
+  <script src="js/suncalc.js"></script>
+</head>
+
+<body>
+
+
+  <h1 class="center">'DevEBox' - STM32F407VG</h1>
+  <div class="center">
+    <!--#menu-->
+  </div>
+  <style>
+    ul {
+      padding: 0;
+      margin-left: 20px;
+    }
+  </style>
+  <h1 class="center">Global settings</h1>
+
+
+
+  <script>
+    function onclickRadio() {
+
+      var x = document.getElementsByName('tlon_de');
+      var y = document.getElementsByName('tlat_de');
+
+      for (var i = 0; i < x.length; i++) {
+        if (x[i].type === "text" && x[i].name === "tlon_de") {
+          var Longitude = x[i].value;
+          //console.log("Longitude = ", Longitude);
+        }
+      }
+      for (var i = 0; i < y.length; i++) {
+        if (y[i].type === "text" && y[i].name === "tlat_de") {
+          var Latitude = y[i].value;
+          //console.log("Latitude = ", Latitude);
+        }
+      }
+
+      var times = SunCalc.getTimes(new Date(), Longitude, Latitude);
+      //console.log(times.sunrise + " " + times.sunset); // Fri Oct 07 2022 06:17:55 GMT+0300 (Восточная Европа, летнее время) Fri Oct 07 2022 17:42:07 GMT+0300 (Восточная Европа, летнее время)
+
+      var sunrise = times.sunrise;
+      var res = sunrise.toString().split(' ', 10); // Разбиваем и сохраняем в массив.
+      let result = res[0].concat(" ", res[1], " ", res[2], " ", res[3], " ", res[4], " "); // Конкатенируем в нужном формате для unixTime формата.
+      var sr = res[4];
+      //console.log("Result line: ", res); // Result line
+      //console.log("Sunrise time: ", res[4]); // Sunrise time
+      const sunrise_unixTime = Date.parse(result); // Перевели в unixTime формат.
+      //console.log("Sunrise time in unixTime: ", sunrise_unixTime);
+
+      var sunset = times.sunset;
+      var res = sunset.toString().split(' ', 10); // Разбиваем и сохраняем в массив.
+      let result2 = res[0].concat(" ", res[1], " ", res[2], " ", res[3], " ", res[4], " "); // Конкатенируем в нужном формате для unixTime формата.
+      st = res[4];
+      //console.log("Result line: ", res); // Result line
+      //console.log("Sunset time: ", res[4]); // Sunrise time
+      const sunset_unixTime = Date.parse(result2); // Перевели в unixTime формат.
+      //console.log("Sunset time in unixTime: ", sunset_unixTime);
+
+      var span = document.getElementById("Sunrise");
+      span.textContent = sr;
+
+      var span = document.getElementById("Sunset");
+      span.textContent = st;
+    }
+
+    function ch_ip() { // check IP 
+      var others = document.getElementById("tb4");
+      var ip_addr = document.getElementById("ip_addr");
+      var sb_mask = document.getElementById("sb_mask");
+      var gateway = document.getElementById("gateway");
+      ip_addr.disabled = others.checked ? false : true;
+      sb_mask.disabled = others.checked ? false : true;
+      gateway.disabled = others.checked ? false : true;
+      ip_addr.value = "DHCP-assigned IP address.";
+      sb_mask.value = "DHCP-assigned IP address.";
+      gateway.value = "DHCP-assigned IP address.";
+      if (!ip_addr.disabled) {
+        ip_addr.focus();
+      }
+      if (!sb_mask.disabled) {
+        sb_mask.focus();
+      }
+      if (!gateway.disabled) {
+        gateway.focus();
+      }
+      if (!ip_addr.disabled) {
+        f.style.display = 'block'; // Hide
+        g.style.display = 'none'; // Show
+      }
+      if (ip_addr.disabled) {
+        f.style.display = 'none'; // Hide
+        g.style.display = 'block'; // Show
+      }
+    }
+
+
+    function ch_mqtt() { // check MQTT
+      var others = document.getElementById("tb5");
+      var mqt_hst = document.getElementById("mqt_hst");
+      var mqtt_prt = document.getElementById("mqtt_prt");
+      var mqtt_clt = document.getElementById("mqtt_clt");
+      var mqtt_usr = document.getElementById("mqtt_usr");
+      var mqt_pswd = document.getElementById("mqt_pswd");
+      var mqtt_tpc = document.getElementById("mqtt_tpc");
+      var mqt_ftpc = document.getElementById("mqt_ftpc");
+      mqt_hst.disabled = others.checked ? false : true;
+      mqtt_prt.disabled = others.checked ? false : true;
+      mqtt_clt.disabled = others.checked ? false : true;
+      mqtt_usr.disabled = others.checked ? false : true;
+      mqt_pswd.disabled = others.checked ? false : true;
+      mqtt_tpc.disabled = others.checked ? false : true;
+      mqt_ftpc.disabled = others.checked ? false : true;
+      mqt_hst.value = "None";
+      mqtt_prt.value = "None";
+      mqtt_clt.value = "None";
+      mqtt_usr.value = "None";
+      mqt_pswd.value = "None";
+      mqtt_tpc.value = "None";
+      mqt_ftpc.value = "None";
+      if (!mqt_hst.disabled) {
+        mqt_hst.focus();
+      }
+      if (!mqtt_prt.disabled) {
+        mqtt_prt.focus();
+      }
+      if (!mqtt_clt.disabled) {
+        mqtt_clt.focus();
+      }
+      if (!mqtt_usr.disabled) {
+        mqtt_usr.focus();
+      }
+      if (!mqt_pswd.disabled) {
+        mqt_pswd.focus();
+      }
+      if (!mqtt_tpc.disabled) {
+        mqtt_tpc.focus();
+      }
+      if (!mqt_ftpc.disabled) {
+        mqt_ftpc.focus();
+      }
+      if (!mqt_hst.disabled) {
+        ff.style.display = 'block'; // Hide
+        gg.style.display = 'none'; // Show
+      }
+      if (mqt_hst.disabled) {
+        ff.style.display = 'none'; // Hide
+        gg.style.display = 'block'; // Show
+      }
+    }
+  </script>
+
+  <form action="settings.shtml" method="get">
+
+    <h3 class="center"> Настройки сети </h3>
+
+    <table class="zebra_2" border="1" align="center" width="350">
+
+
+
+      <tr>
+        <td colspan="2">
+          <div>
+            <div style="float: left;"> <label class="switch">
+                <input name="check_ip" id="tb0" type="hidden" value="0">
+                <input type="checkbox" name="check_ip" value="1" id="tb4" onclick="check_ip();getValue('tb4','tb0');">
+
+                <span class="slider round"></span>
+              </label>
+            </div>
+            <div value="1" style="float: left; padding: 10px;">
+              Use the following IP address:
+            </div>
+            <div value="0" style="display: none; float: left;  padding: 10px;">
+              Get an IP address automaticaly
+            </div>
+          </div>
+        </td>
+      </tr>
+
+
+      <tr class="cls" id="hide_show1" style="display:table-row">
+        <td width="190">IP address:</address>
+          <div class="tooltip">
+            <a class="support" href="#">(?)
+              <span class="tooltiptext">Введите статический ip адрес. После перезагрузки "STM-32" будет доступна по
+                введенному адресу!</span>
+            </a>
+          </div>
+        </td>
+        <td class="center">
+
+          <input type="text" minlength="7" maxlength="15" size="12" id="ip_addr" name="ip_addr"
+            value="<!--#ip_addr0-->.<!--#ip_addr1-->.<!--#ip_addr2-->.<!--#ip_addr3-->"
+            pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$">
+        </td>
+      </tr>
+
+      <tr class="cls" id="hide_show2" style="display:table-row">
+        <td>Subnet mask:</address>
+          <div class="tooltip">
+            <a class="support" href="#">(?)
+              <span class="tooltiptext">Введите маску подсети!</span>
+            </a>
+          </div>
+        </td>
+        <td class="center">
+          <input type="text" minlength="7" maxlength="15" size="12" id="sb_mask" name="sb_mask"
+            value="<!--#sb_mask0-->.<!--#sb_mask1-->.<!--#sb_mask2-->.<!--#sb_mask3-->"
+            pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$">
+        </td>
+      </tr>
+
+      <tr class="cls" id="hide_show3" style="display:table-row">
+        <td>Default gateway:</address>
+          <div class="tooltip">
+            <a class="support" href="#">(?)
+              <span class="tooltiptext">Введите шлюз по умолчанию!</span>
+            </a>
+          </div>
+        </td>
+        <td class="center"> <input type="text" minlength="7" maxlength="15" size="12" id="gateway" name="gateway"
+            value="<!--#gateway0-->.<!--#gateway1-->.<!--#gateway2-->.<!--#gateway3-->"
+            pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$">
+        </td>
+      </tr>
+
+    </table>
+
+    <br>
+    <h3 class="center"> Настройки MQTT </h3>
+    <table class="zebra_2" border="1" align="center" id="tab2" width="350">
+
+      <tr>
+        <td colspan="2">
+          <div>
+            <div style="float: left;"> <label class="switch">
+                <input name="check_mqtt" onclick="ch_mqtt()" type="hidden" value="0" id="ttb0" checked="checked">
+                <input name="check_mqtt" onclick="ch_mqtt()" type="checkbox" value="1" id="tb5">
+                <span class="slider round"></span>
+              </label>
+            </div>
+
+            <div id="ff" style="float: left; padding: 10px;">
+              I'll use the MQTT:
+            </div>
+            <div id="gg" style="display: none; float: left;  padding: 10px;">
+              I don't use the MQTT!
+            </div>
+          </div>
+        </td>
+      </tr>
+
+      <tr id="mqtt">
+        <td width="190">Host:</address>
+          <div class="tooltip">
+            <a class="support" href="#">(?)
+              <span class="tooltiptext">Введите ip адрес "MQTT" брокера.</span>
+            </a>
+          </div>
+        </td>
+        <td class="center">
+          <input type="text" minlength="7" maxlength="15" size="12" id="mqt_hst" name="mqt_hst"
+            value="<!--#mqt_hst0-->.<!--#mqt_hst1-->.<!--#mqt_hst2-->.<!--#mqt_hst3-->"
+            pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$">
+        </td>
+      </tr>
+
+      <tr id="mqtt">
+        <td>Port:</address>
+          <div class="tooltip">
+            <a class="support" href="#">(?)
+              <span class="tooltiptext">Укажите порт "MQTT" брокера.</span>
+            </a>
+          </div>
+        </td>
+        <td class="center">
+          <input type="text" minlength="1" maxlength="10" size="12" id="mqtt_prt" name="mqtt_prt"
+            value="<!--#mqtt_prt-->">
+        </td>
+      </tr>
+
+      <tr id="mqtt">
+        <td>Client:</address>
+          <div class="tooltip">
+            <a class="support" href="#">(?)
+              <span class="tooltiptext">Укажите клиент "id".</span>
+            </a>
+          </div>
+        </td>
+        <td class="center"> <input type="text" minlength="1" maxlength="10" id="mqtt_clt" name="mqtt_clt" size="12"
+            value="<!--#mqtt_clt-->">
+        </td>
+      </tr>
+
+      <tr id="mqtt">
+        <td>User:</address>
+          <div class="tooltip">
+            <a class="support" href="#">(?)
+              <span class="tooltiptext">Укажите имя пользователя.</span>
+            </a>
+          </div>
+        </td>
+        <td class="center"> <input type="text" minlength="1" maxlength="10" id="mqtt_usr" name="mqtt_usr" size="12"
+            value="<!--#mqtt_usr-->">
+        </td>
+      </tr>
+
+      <tr id="mqtt">
+        <td>Password:</address>
+          <div class="tooltip">
+            <a class="support" href="#">(?)
+              <span class="tooltiptext">Укажите пароль.</span>
+            </a>
+          </div>
+        </td>
+        <td class="center"> <input type="text" minlength="1" maxlength="15" id="mqt_pswd" name="mqt_pswd" size="12"
+            value="<!--#mqt_pswd-->">
+        </td>
+      </tr>
+
+      <tr id="mqtt">
+        <td>Topic:</address>
+          <div class="tooltip">
+            <a class="support" href="#">(?)
+              <span class="tooltiptext">Укажите пояснительное имя.</span>
+            </a>
+          </div>
+        </td>
+        <td class="center"> <input type="text" minlength="1" maxlength="15" id="mqtt_tpc" name="mqtt_tpc" size="12"
+            value="<!--#mqtt_tpc-->">
+        </td>
+      </tr>
+
+      <tr id="mqtt">
+        <td>Full Topic:</address>
+          <div class="tooltip">
+            <a class="support" href="#">(?)
+              <span class="tooltiptext">Full Topic.</span>
+            </a>
+          </div>
+        </td>
+        <td class="center"> <input type="text" minlength="1" maxlength="15" id="mqt_ftpc" name="mqt_ftpc" size="12"
+            value="<!--#mqt_ftpc-->">
+        </td>
+      </tr>
+
+    </table>
+
+    <br>
+
+    <h3 class="center"> Настройки координат </h3>
+
+    <table class="zebra_2" border="1" align="center" id="tab1" width="350">
+      <tr>
+      <tr>
+        <td width="190">Longitude <div class="tooltip">
+            <a class="support" href="#">(?)
+              <span class="tooltiptext">Долгота́ (Longitude). Округлите до трёх знаков после запятой!</span>
+            </a>
+          </div>
+        </td>
+        <td><input type="text" size="10" maxlength="9" name="tlon_de" value="<!--#tlon_de-->"></td>
+      </tr>
+
+      <tr>
+        <td>Latitude <div class="tooltip">
+            <a class="support" href="#">(?)
+              <span class="tooltiptext">Широта (Latitude). Округлите до трёх знаков после запятой!</span>
+            </a>
+          </div>
+        </td>
+        <td><input type="text" size="10" maxlength="8" name="tlat_de" value="<!--#tlat_de-->"></td>
+      </tr>
+
+      <tr>
+        <td>Sunrise <div class="tooltip">
+            <a class="support" href="#">(?)
+              <span class="tooltiptext">Восход солнца (Sunrise). Значение установится автоматически согласно Вашим
+                координатам!</span>
+            </a>
+          </div>
+        </td>
+        <td><span id="Sunrise"> </span> </td>
+      </tr>
+
+      <td>Sunset <div class="tooltip">
+          <a class="support" href="#">(?)
+            <span class="tooltiptext">Закат солнца (Sunrise). Значение установится автоматически согласно Вашим
+              координатам!</span>
+          </a>
+        </div>
+      </td>
+      <td><span id="Sunset"></span></td>
+      </tr>
+
+    </table>
+
+    <center>
+      <br>
+      <button> Save configuration </button>
+      </br>
+    </center>
+
+  </form>
+
+  <script type="text/javascript">
+
+    function check_ip() { // При активации checked скрываем нужные поля.
+      var checkBox = document.getElementById("tb4");
+      //var xor = document.querySelectorAll('.cls')[0];
+      var x1 = document.getElementById("hide_show1");
+      var x2 = document.getElementById("hide_show2");
+      var x3 = document.getElementById("hide_show3");
+      //console.log("checkBox.checked = ", checkBox.checked);
+      if (checkBox.checked == true) {
+        x1.style.display = 'none'; //block
+        x2.style.display = 'none'; //block
+        x3.style.display = 'none'; //block
+      } else {
+        x1.style.display = 'table-row';
+        x2.style.display = 'table-row';
+        x3.style.display = 'table-row';
+      }
+
+    }
+
+    function getValue(id1, id2) {
+      var result = "";
+      if (document.getElementById(id1).checked) {
+        //console.log("sunrise is checked");
+        result = "1";
+      } else {
+        //console.log("sunrise didn't check it!");
+        result = "0";
+      }
+      document.getElementById(id2).value = result; // Перезапишем 
+      console.log("value = ", result);
+    }
+
+    function codeAddress() {
+      onclickRadio();
+    }
+    window.onload = codeAddress;
+
+  </script>
+
+  </script>
+</body>
+
+</html>
