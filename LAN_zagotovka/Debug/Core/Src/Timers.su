@@ -1,0 +1,10 @@
+Timers.c:162:10:ssi_handler	112	static
+Timers.c:620:13:CGIForm_Handler	32	static
+Timers.c:636:13:CGIForm_Handler1	32	static
+Timers.c:664:13:CGIForm_Handler2	32	static
+Timers.c:681:13:CGIForm_Handler3	80	static
+Timers.c:900:13:CGIForm_Handler4	40	static
+Timers.c:1030:7:httpd_post_begin	24	static
+Timers.c:1053:7:httpd_post_receive_data	16	static
+Timers.c:1078:6:httpd_post_finished	1176	static
+Timers.c:1219:6:http_server_init	8	static
