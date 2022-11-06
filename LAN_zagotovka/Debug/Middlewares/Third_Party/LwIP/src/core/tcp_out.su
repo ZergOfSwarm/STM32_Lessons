@@ -6,7 +6,7 @@ tcp_out.c:390:1:tcp_write	120	static
 tcp_out.c:827:1:tcp_split_unsent_seg	56	static
 tcp_out.c:1001:1:tcp_send_fin	32	static
 tcp_out.c:1032:1:tcp_enqueue_flags	48	static
-tcp_out.c:1237:1:tcp_output	56	static
+tcp_out.c:1237:1:tcp_output	64	static
 tcp_out.c:1432:1:tcp_output_segment_busy	16	static
 tcp_out.c:1455:1:tcp_output_segment	64	static
 tcp_out.c:1631:1:tcp_rexmit_rto_prepare	32	static

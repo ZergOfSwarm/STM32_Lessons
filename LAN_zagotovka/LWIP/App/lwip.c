@@ -94,7 +94,7 @@ void MX_LWIP_Init(void)
 
   /* Start DHCP negotiation for a network interface (IPv4) */
   dhcp_start(&gnetif);
-}
+
 /* USER CODE BEGIN 3 */
 #else
   void MX_LWIP_Init(void)
@@ -148,7 +148,7 @@ void MX_LWIP_Init(void)
 
     /* Create the Ethernet link handler thread */
   }
-
+/* USER CODE BEGIN 3 */
 #endif
 /* USER CODE END 3 */
 //}

@@ -68,6 +68,8 @@ Middlewares/Third_Party/LwIP/src/core/timeouts.o: \
  ../Middlewares/Third_Party/LwIP/src/include/lwip/prot/ieee.h \
  ../Middlewares/Third_Party/LwIP/src/include/lwip/prot/etharp.h \
  ../Middlewares/Third_Party/LwIP/src/include/lwip/dhcp.h \
+ ../Middlewares/Third_Party/LwIP/src/include/lwip/udp.h \
+ ../Middlewares/Third_Party/LwIP/src/include/lwip/prot/udp.h \
  ../Middlewares/Third_Party/LwIP/src/include/lwip/autoip.h \
  ../Middlewares/Third_Party/LwIP/src/include/lwip/igmp.h \
  ../Middlewares/Third_Party/LwIP/src/include/lwip/dns.h \
@@ -214,6 +216,10 @@ Middlewares/Third_Party/LwIP/src/core/timeouts.o: \
 ../Middlewares/Third_Party/LwIP/src/include/lwip/prot/etharp.h:
 
 ../Middlewares/Third_Party/LwIP/src/include/lwip/dhcp.h:
+
+../Middlewares/Third_Party/LwIP/src/include/lwip/udp.h:
+
+../Middlewares/Third_Party/LwIP/src/include/lwip/prot/udp.h:
 
 ../Middlewares/Third_Party/LwIP/src/include/lwip/autoip.h:
 

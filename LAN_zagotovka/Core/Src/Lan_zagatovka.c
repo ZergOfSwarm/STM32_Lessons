@@ -87,13 +87,13 @@ struct tablepins tp[numpin] = {
 		{"PE14", "E", 14, GPIO_PIN_14, GPIOE},
 		{"PE15", "E", 15, GPIO_PIN_15, GPIOE} };
 
-extern struct intoout TO[numpintopin];
-extern struct table T[numpin];
-extern struct time_table Tt[50];  // Для странички "edit_timers.shtml"
+struct intoout TO[numpintopin];
+struct table T[numpin];
+struct time_table Tt[50];  // Для странички "edit_timers.shtml"
 extern struct Str_table Settings;
 
 // По умолчанию "Долгота" и "Широта"
-struct Str_table Settings;
+struct Str_table Settings; // для странички "Settings"
 //struct Str_table Settings = {46.3417, 42.2678}; // Longitude/Долгота и Latitude/Широта
 
 struct Str_table Settings = {

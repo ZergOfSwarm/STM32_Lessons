@@ -13,7 +13,7 @@
   <script src="js/suncalc.js"></script>
 </head>
 
-<body>
+<body onload="setFirstSettings()">
 
 
   <h1 class="center">'DevEBox' - STM32F407VG</h1>
@@ -98,17 +98,17 @@
               </label>
             </div>
             <div id="aa" style="float: left; padding: 10px;">
-              Use the following IP address:
+              Get an IP address automaticaly
             </div>
             <div id="bb" style="display: none; float: left;  padding: 10px;">
-              Get an IP address automaticaly
+              Use the following IP address:
             </div>
           </div>
         </td>
       </tr>
 
 
-      <tr class="cls" id="hide_show1" style="display:table-row">
+      <tr class="cls" id="hide_show1" style="display:none">
         <td width="190">IP address:</address>
           <div class="tooltip">
             <a class="support" href="#">(?)
@@ -125,7 +125,7 @@
         </td>
       </tr>
 
-      <tr class="cls" id="hide_show2" style="display:table-row">
+      <tr class="cls" id="hide_show2" style="display:none">
         <td>Subnet mask:</address>
           <div class="tooltip">
             <a class="support" href="#">(?)
@@ -140,7 +140,7 @@
         </td>
       </tr>
 
-      <tr class="cls" id="hide_show3" style="display:table-row">
+      <tr class="cls" id="hide_show3" style="display:none">
         <td>Default gateway:</address>
           <div class="tooltip">
             <a class="support" href="#">(?)
@@ -171,16 +171,16 @@
             </div>
 
             <div id="cc" style="float: left; padding: 10px;">
-              I'll use the MQTT:
+              I don't use the MQTT!
             </div>
             <div id="dd" style="display: none; float: left;  padding: 10px;">
-              I don't use the MQTT!
+              I'll use the MQTT:
             </div>
           </div>
         </td>
       </tr>
 
-      <tr class="cls" id="hide_show4" style="display:table-row">
+      <tr class="cls" id="hide_show4" style="display:none">
         <td width="190">Host:</address>
           <div class="tooltip">
             <a class="support" href="#">(?)
@@ -195,7 +195,7 @@
         </td>
       </tr>
 
-      <tr class="cls" id="hide_show5" style="display:table-row">
+      <tr class="cls" id="hide_show5" style="display:none">
         <td>Port:</address>
           <div class="tooltip">
             <a class="support" href="#">(?)
@@ -209,7 +209,7 @@
         </td>
       </tr>
 
-      <tr class="cls" id="hide_show6" style="display:table-row">
+      <tr class="cls" id="hide_show6" style="display:none">
         <td>Client:</address>
           <div class="tooltip">
             <a class="support" href="#">(?)
@@ -222,7 +222,7 @@
         </td>
       </tr>
 
-      <tr class="cls" id="hide_show7" style="display:table-row">
+      <tr class="cls" id="hide_show7" style="display:none">
         <td>User:</address>
           <div class="tooltip">
             <a class="support" href="#">(?)
@@ -235,7 +235,7 @@
         </td>
       </tr>
 
-      <tr class="cls" id="hide_show8" style="display:table-row">
+      <tr class="cls" id="hide_show8" style="display:none">
         <td>Password:</address>
           <div class="tooltip">
             <a class="support" href="#">(?)
@@ -248,7 +248,7 @@
         </td>
       </tr>
 
-      <tr class="cls" id="hide_show9" style="display:table-row">
+      <tr class="cls" id="hide_show9" style="display:none">
         <td>Topic:</address>
           <div class="tooltip">
             <a class="support" href="#">(?)
@@ -261,7 +261,7 @@
         </td>
       </tr>
 
-      <tr class="cls" id="hide_show10" style="display:table-row">
+      <tr class="cls" id="hide_show10" style="display:none">
         <td>Full Topic:</address>
           <div class="tooltip">
             <a class="support" href="#">(?)
@@ -348,14 +348,16 @@
         x1.style.display = 'table-row';
         x2.style.display = 'table-row';
         x3.style.display = 'table-row';
-        aa.style.display = 'block';
-        bb.style.display = 'none';
+
+        aa.style.display = 'none';
+        bb.style.display = 'block';
       } else {
         x1.style.display = 'none'; //block
         x2.style.display = 'none'; //block
         x3.style.display = 'none'; //block
-        aa.style.display = 'none'; //block
-        bb.style.display = 'block';
+
+        aa.style.display = 'block';
+        bb.style.display = 'none';
       }
     }
 
@@ -380,8 +382,9 @@
         y5.style.display = 'table-row';
         y6.style.display = 'table-row';
         y7.style.display = 'table-row';
-        cc.style.display = 'block';
-        dd.style.display = 'none';
+
+        cc.style.display = 'none';
+        dd.style.display = 'block';
       } else {
         y1.style.display = 'none'; //block
         y2.style.display = 'none'; //block
@@ -390,8 +393,9 @@
         y5.style.display = 'none'; //block
         y6.style.display = 'none'; //block
         y7.style.display = 'none'; //block
-        cc.style.display = 'none';
-        dd.style.display = 'block';
+
+        cc.style.display = 'block';
+        dd.style.display = 'none';
       }
     }
 
@@ -413,6 +417,14 @@
       onclickRadio();
     }
     window.onload = codeAddress;
+
+
+    function setFirstSettings() {
+      checkip();
+      getValue('tb4', 'tb0');
+      checkip();
+      getValue('tb4', 'tb0');
+    }
 
   </script>
 

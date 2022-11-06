@@ -98,11 +98,6 @@ struct tablepins { // Создали структуру с необходимы�
 };
 
 extern struct tablepins tp[numpin];
-struct table T[numpin];
-struct Str_table Settings; // для странички "Settings".
-struct time_table Tt[50]; // Для странички "edit_timers.shtml"
-
-struct intoout TO[numpintopin];
 
 
 #endif /* INC_LAN_ZAGATOVKA_H_ */

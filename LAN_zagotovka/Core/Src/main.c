@@ -23,8 +23,6 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include <stdio.h>/* для printf */
-#include <Lan_zagatovka.h>
-
 #include "lwip/apps/httpd.h" // including httpd.h [- HTTPd #1 -]
 /* USER CODE END Includes */
 
@@ -66,7 +64,7 @@ int _write(int file, char *ptr, int len) {
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-struct netif gnetif;
+extern struct netif gnetif;
 /* USER CODE END 0 */
 
 /**
@@ -105,6 +103,8 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  printf("Hello world! \r\n");
+
   while (1)
   {
     /* USER CODE END WHILE */
