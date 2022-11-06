@@ -1,0 +1,211 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title>Таблица</title>
+  <link type="image/x-icon" rel="shortcut icon" href="favicon.ico">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <link rel="stylesheet" href="styles.css">
+
+
+  <script>
+
+    function get_date_in_unix() {
+
+      const a = document.getElementsByName('s_date')[0].value;
+      const b = document.getElementsByName('s_time')[0].value;
+
+      const c = document.getElementsByName('e_date')[0].value;
+      const d = document.getElementsByName('e_time')[0].value;
+      const Str1 = a + ' ' + b; // 👉️ '2015-10-21 10:20:30'
+      const s_dt = parseInt((new Date(Str1).getTime() / 1000).toFixed(0)) // 👉️ 1445412030
+      const Str2 = c + ' ' + d; // 👉️ '2015-10-21 10:20:30'
+      const e_dt = parseInt((new Date(Str2).getTime() / 1000).toFixed(0)) // 👉️ 1445412030
+
+      document.getElementById('s_dt').value = s_dt;
+      document.getElementById('e_dt').value = e_dt;
+
+      //console.log(s_dt);
+      //console.log(e_dt);
+    }
+    function date_time(s_dt, e_dt) {
+      // Will display date & time in 2015.9.3 T 10:20:30 format
+      let e = s_dt;
+      let f = e_dt;
+      var date = new Date(e * 1000);
+      var s_day = date.getDay();
+      var s_manth = date.getMonth();
+      var s_year = date.getFullYear();
+      var s_hours = date.getHours();
+      var s_minutes = "0" + date.getMinutes();
+      var s_seconds = "0" + date.getSeconds();
+      var s_result_date = s_year + '.' + s_manth + '.' + s_day;
+      var s_result_time = s_hours + ':' + s_minutes.substr(-2) + ':' + s_seconds.substr(-2);
+      // Inserting the code block to s_date element
+      document.getElementById("s_date").innerHTML = s_result_date
+      document.getElementById("s_time").innerHTML = s_result_time
+
+      // Will display date & time in 2015.9.3 T 10:20:30 format
+      var date = new Date(f * 1000);
+      var e_day = date.getDay();
+      var e_manth = date.getMonth();
+      var e_year = date.getFullYear();
+      var e_hours = date.getHours();
+      var e_minutes = "0" + date.getMinutes();
+      var e_seconds = "0" + date.getSeconds();
+      var e_result_date = e_year + '.' + e_manth + '.' + e_day;
+      var e_result_time = e_hours + ':' + e_minutes.substr(-2) + ':' + e_seconds.substr(-2);
+      // Inserting the code block to s_date element
+      document.getElementById("e_date").innerHTML = e_result_date
+      document.getElementById("e_time").innerHTML = e_result_time
+      console.log("s_result_date - ", s_result_date);
+      console.log("s_result_time - ", s_result_time);
+      console.log("e_result_date - ", e_result_date);
+      console.log("e_result_time - ", e_result_time);
+    }
+  </script>
+
+
+</head>
+
+<body onload="date_time(<!--#s_dt-->, <!--#e_dt-->);">
+
+  <center>
+    <h1>'DevEBox' - STM32F407VG</h1>
+    <!--#menu-->
+
+    <h4 id="title1">Edit Relay pin</h4>
+  </center>
+
+  <form action="timers.shtml" method="get">
+    <table class="zebra_3" border="1" align="center" id="tab1">
+
+      <br>
+      <center>
+        <button> Save pin </button>
+      </center>
+
+      <tr>
+        <td class="center">ID</td>
+        <td>
+
+        </td>
+      </tr>
+
+      <tr>
+        <td class="center">Pin</td>
+        <td>
+
+        </td>
+      </tr>
+
+      <tr>
+        <td class="center">Immediately</td>
+
+        <td> <input name="Immediately" type="hidden" value="0"> <input type="checkbox" name="Immediately" value="1"
+            id="Immediately" checked></td>
+      </tr>
+
+      <tr>
+        <td class="center">Start data</td>
+        <td><input type="date" id="s_date" name="s_date" value="yyyy-MM-dd" min="2022-10-19" max="4022-12-31"
+            onclick="get_date_in_unix()">
+          <input type="time" id="s_time" name="s_time" value="h:m:s" step="1" min="00:00:00" max="23:59:59" required
+            onclick="get_date_in_unix()">
+          <input type="hidden" id="s_dt" name="s_dt" value="<!--#e_dt-->">
+
+        </td>
+      </tr>
+      <tr>
+        <td class="center">End data</td>
+        <td> <input name="4b_e_date" type="hidden" value="0"> <input type="checkbox" name="4b_e_date" value="1"
+            id="4b_e_date">
+          <input type="date" id="e_date" name="e_date" value="yyyy-MM-dd" min="2022-10-19" max="4022-12-31"
+            onclick="get_date_in_unix()">
+          <input type="time" id="e_time" name="e_time" value="h:m:s" step="1" min="00:00:00" max="23:59:59" required
+            onclick="get_date_in_unix()">
+          <input type="hidden" id="e_dt" name="e_dt" value="<!--#e_dt-->">
+        </td>
+      </tr>
+      <tr>
+        <td class="center">Repeat</td>
+        <td><input type="number" min="0" max="999" name="set_number" value="0" size="5" style="width:50px">
+          <select name="repeat" id="repeat">
+            <option value="NONE" selected>NONE</option>
+            <option value="Seconds">Seconds</option>
+            <option value="Minutes">Minutes</option>
+            <option value="Hours">Hours</option>
+            <option value="Days">Days</option>
+            <option value="Weeks">Weeks</option>
+            <option value="Months">Months</option>
+            <option value="Years">Years</option>
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td class="center">Action</td>
+        <td><select name="action" id="action">
+            <option value="OFF" selected>OFF</option>
+            <option value="ON">ON</option>
+            <option value="TOGGLE">TOGGLE</option>
+
+          </select></td>
+      </tr>
+      <tr>
+        <td class="center">Group</td>
+        <td><input type="text" name="group" value="group"></td>
+      </tr>
+      </td>
+
+      <tr>
+        <td class="center">Sunrise</td>
+        <td> <input name="4b_sun_rise" type="hidden" value="0"> <input type="checkbox" name="4b_sun_rise" value="1"
+            id="4b_sun_rise">
+      </tr>
+
+      <tr>
+        <td class="center">Sunset</td>'
+        <td> <input name="4b_sun_set" type="hidden" value="0"> <input type="checkbox" name="4b_sun_set" value="1"
+            id="4b_sun_set">
+        </td>
+      </tr>
+
+      <tr>
+        <td class="center">INFO</td>
+        <td><input type="text" name="t_info_ + val.id + " value=" + val.t_info + ">
+        </td>
+      </tr>
+
+    </table>
+  </form>
+
+
+  <script>
+    //For action
+    var objSelect = document.getElementById("action");
+    setSelectedValue(objSelect, "OFF"); // Здесь нужно ввести <--#TEG--> вместо "OFF"
+
+    //For repeat
+    var objSelect = document.getElementById("repeat");
+    setSelectedValue(objSelect, "Seconds"); // Здесь нужно ввести <--#TEG--> вместо ""Seconds""
+
+    function setSelectedValue(selectObj, valueToSet) {
+      for (var i = 0; i < selectObj.options.length; i++) {
+        if (selectObj.options[i].text == valueToSet) {
+          selectObj.options[i].selected = true;
+          return;
+        }
+      }
+    }
+
+
+  </script>
+
+  <script>
+
+  </script>
+</body>
+
+</html>
