@@ -1,0 +1,243 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title>Таблица</title>
+  <link type="image/x-icon" rel="shortcut icon" href="favicon.ico">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <link rel="stylesheet" href="styles.css">
+
+</head>
+
+<body>
+
+
+
+  <center>
+    <h1>'DevEBox' - STM32F407VG</h1>
+
+    <!--#menu-->
+    <style>
+      ul {
+        padding: 0;
+        margin-left: 20px;
+      }
+    </style>
+
+    <h4>Timers</h4>
+
+  </center>
+
+  <form action="timers.shtml" method="post">
+
+
+    <table class="zebra_2" border="1" align="center" id="tab1">
+      <tr>
+        <th>ID <div class="tooltip">
+            <a class="support" href="#">(?)
+              <span class="tooltiptext">ID - уникальный числовой идентификатор кнопки.</span>
+            </a>
+          </div>
+        </th>
+        <th>Pin <div class="tooltip">
+            <a class="support" href="#">(?)
+              <span class="tooltiptext">Pin - номер пина (цифрового или аналогового), куда подключена кнопка.</span>
+            </a>
+          </div>
+        </th>
+        <th>Immediately<div class="tooltip">
+            <a class="support" href="#">(?)
+              <span class="tooltiptext">Immediately т.е. включение таймера сразу после подачи питания.</span>
+            </a>
+          </div>
+        </th>
+        <th class="firstline">Start data<div class="tooltip">
+            <a class="support" href="#">(?)
+              <span class="tooltiptext">Start data - укажите дату и время включения таймера.</span>
+            </a>
+          </div>
+        </th>
+        <th class="firstline">End data <div class="tooltip">
+            <a class="support" href="#">(?)
+              <span class="tooltiptext">End data - укажите дату и время отключения таймера.</span>
+            </a>
+          </div>
+        </th>
+        <th class="firstline">Repeat <div class="tooltip">
+            <a class="support" href="#">(?)
+              <span class="tooltiptext">Repeat - укажите численное значение интервала и его размерность, максимальное
+                значение 999.</span>
+            </a>
+          </div>
+        </th>
+        <th class="firstline">Action<div class="tooltip">
+            <a class="support" href="#">(?)
+              <span class="tooltiptext">Action - Укажите действие таймера.</span>
+            </a>
+          </div>
+        </th>
+        <th class="firstline">Group<div class="tooltip">
+            <a class="support" href="#">(?)
+              <span class="tooltiptext">Group - Укажите в какие группы этот таймер входит.</span>
+            </a>
+          </div>
+        </th>
+        <th class="firstline">sunrise<div class="tooltip">
+            <a class="support" href="#">(?)
+              <span class="tooltiptext">Group - Укажите в какие группы этот таймер входит.</span>
+            </a>
+          </div>
+        </th>
+        <th class="firstline">sunset<div class="tooltip">
+            <a class="support" href="#">(?)
+              <span class="tooltiptext">Group - Укажите в какие группы этот таймер входит.</span>
+            </a>
+          </div>
+        </th>
+
+        <th>INFO <div class="tooltip">
+            <a class="support" href="#">(?)
+              <span class="tooltiptext">Укажите краткую информацию данного таймера.</span>
+            </a>
+          </div>
+        </th>
+        <th>On/Off <div class="tooltip">
+            <a class="support" href="#">(?)
+              <span class="tooltiptext">Включить либо отключить данный таймер.</span>
+            </a>
+          </div>
+        </th>
+      </tr>
+
+    </table>
+    <center>
+      <br>
+      <button> Save On/Off </button>
+    </center>
+  </form>
+
+  <script>
+    $(document).ready(function () {
+      $.getJSON('json.shtml?jsongo=4', function (data) {
+        var employee_data = '';
+        var n = 0;
+        var z = '';
+
+        $.each(data, function (key, val) {
+          if (val.topin == 2) {
+            employee_data += '<tr>';
+            employee_data += '<td>' + val.id + '</td>';
+            employee_data += '<td>' + val.pins + '</td>';
+
+            //employee_data += '<td align=\"center\">' + val.imm_ly + '</td>';
+            if (val.imm_ly == 1) {
+              employee_data += '<td align=\"center\">ON</td>';
+              //console.log("imm_ly is ON");
+            } else {
+              employee_data += '<td align=\"center\">OFF</td>';
+              //onsole.log("imm_ly is OFF");
+            }
+
+            //employee_data += '<td align=\"center\">' + val.s_dt + '</td>';
+            const timestamp1 = val.s_dt;
+            const date1 = new Date(timestamp1 * 1000);
+            const datevalues1 = [
+              date1.getFullYear() + '.'
+              + (date1.getMonth() + 1) + '.'
+              + date1.getDate() + ' '
+              + date1.getHours() + ':'
+              + date1.getMinutes() + ':'
+              + date1.getSeconds()
+            ];
+            val.s_dt = datevalues1;
+            if (date1.getFullYear() === 1970) {
+              employee_data += '<td align=\"center\">NONE</td>';
+            } else {
+              employee_data += '<td align=\"center\">' + val.s_dt + '</td>';
+            }
+            //employee_data += '<td align=\"center\">' + val.e_dt + '</td>';
+            const timestamp2 = val.e_dt;
+            const date2 = new Date(timestamp2 * 1000);
+            const datevalues2 = [
+              date2.getFullYear() + '.'
+              + (date2.getMonth() + 1) + '.'
+              + date2.getDate() + ' '
+              + date2.getHours() + ':'
+              + date2.getMinutes() + ':'
+              + date2.getSeconds()
+            ];
+            val.e_dt = datevalues2;
+            if (date2.getFullYear() === 1970) {
+              employee_data += '<td align=\"center\">NONE</td>';
+            } else {
+              employee_data += '<td align=\"center\">' + val.e_dt + '</td>';
+            }
+
+            employee_data += '<td align=\"center\">' + val.t_repeat + '</td>';
+            //employee_data += '<td align=\"center\">' + val.t_action + '</td>';
+            if (val.t_action == 1) {
+              employee_data += '<td align=\"center\">ON</td>';
+              //console.log("action is ON");
+            } else if (val.t_action == 0) {
+              employee_data += '<td align=\"center\">OFF</td>';
+              //onsole.log("action is OFF");
+            } else {
+              employee_data += '<td align=\"center\">TOGGLE</td>';
+              //onsole.log("action is TOGGLE");
+            }
+
+            //employee_data += '<td align=\"center\">' + val.t_group + '</td>';
+            if (val.t_group == 0) {
+              employee_data += '<td align=\"center\">NONE</td>';
+              //console.log("ON");
+            } else {
+              employee_data += '<td>' + val.t_group + '</td>';
+              //onsole.log("OFF");
+            }
+
+            //employee_data += '<td align=\"center\">' + val.sunrise + '</td>';
+            if (val.sunrise == 1) {
+              employee_data += '<td align=\"center\">ON</td>';
+              //console.log("ON");
+            } else {
+              employee_data += '<td align=\"center\">OFF</td>';
+              //onsole.log("OFF");
+            }
+
+            //employee_data += '<td align=\"center\">' + val.sunset + '</td>';
+            if (val.sunset == 1) {
+              employee_data += '<td align=\"center\">ON</td>';
+              //console.log("ON");
+            } else {
+              employee_data += '<td align=\"center\">OFF</td>';
+              //onsole.log("OFF");
+            }
+
+            //employee_data += '<td>' + val.t_info + '</td>';
+            if (val.t_info == 0) {
+              employee_data += '<td align=\"center\">NONE</td>';
+              //console.log("ON");
+            } else {
+              employee_data += '<td>' + val.t_info + '</td>';
+              //onsole.log("OFF");
+            }
+
+            if (val.t_onoff == 1) {
+              employee_data += '<td><label class=\"switch\"> <input name=\"t_onoff_' + val.id + '\" type=\"hidden\" value=\"0\"> <input type=\"checkbox\" name=\"t_onoff_' + val.id + '\" value=\"1\" checked=\"checked\"><span class=\"slider round\"></span></label></td>'
+            } else {
+              employee_data += '<td><label class=\"switch\"> <input name=\"t_onoff_' + val.id + '\" type=\"hidden\" value=\"0\"> <input type=\"checkbox\" name=\"t_onoff_' + val.id + '\" value=\"1\" unchecked=\"unchecked\"><span class=\"slider round\"></span></label></td>'
+            }
+            employee_data += '<td>| <a href=\"edit_timers.shtml?id=' + val.id + '&pin=' + val.pins + '&tab=1\">Edit</a> |</td>';
+            employee_data += '</tr>';
+          }
+          n++;
+        });
+        $('#tab1').append(employee_data);
+      });
+    });
+  </script>
+</body>
+
+</html>

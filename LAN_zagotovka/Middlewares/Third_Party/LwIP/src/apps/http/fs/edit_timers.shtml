@@ -1,0 +1,312 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title>Таблица</title>
+  <link type="image/x-icon" rel="shortcut icon" href="favicon.ico">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <link rel="stylesheet" href="styles.css">
+
+</head>
+
+<body onload="setFirstSettings()">
+
+  <center>
+    <h1>'DevEBox' - STM32F407VG</h1>
+    <!--#menu-->
+
+    <h4 id="title1">Edit Relay pin</h4>
+  </center>
+
+  <form action="edit_timers.shtml" method="get">
+    <table class="zebra_3" border="1" align="center" id="tab1">
+
+      <br>
+      <center>
+        <button> Save pin </button>
+      </center>
+
+      <tr>
+        <td class="center">ID</td>
+        <td>
+          <input type="hidden" name="id_id" value="<!--#id-->">
+          <!--#id-->
+        </td>
+      </tr>
+
+      <tr>
+        <td class="center">Pin</td>
+        <td>
+          <input type="hidden" name="pin_pin" value="<!--#pins-->">
+          <!--#pins-->
+        </td>
+      </tr>
+
+      <tr>
+        <td class="center">immediately</td>
+        <td> <input name="immediately" id="immediately" type="hidden" value="0">
+          <input type="checkbox" name="himmediately" value="1" id="himmediately" <!--#imm_ly-->
+          onclick="imm();getValue('himmediately','immediately');">
+
+        </td>
+      </tr>
+      <tr class="cls" id="hide_show1" style="display:table-row">
+        <td class="center">Start data</td>
+        <td>
+          <input type="datetime-local" id="start_date" name="start_date" value="YYYY-MM-DD'T'HH:mm:ss"
+            min="2022-10-27T00:00:00" max="2122-10-27T00:00:00" step="1"
+            onchange="data_to_unix('unix_sd','start_date');">
+          <input type="hidden" id="unix_sd" name="s_dt" value="<!--#s_dt-->">
+        </td>
+
+      </tr>
+      <tr class="cls" id="hide_show2" style="display:table-row">
+        <td class="center">End data</td>
+        <td>
+          <input type="datetime-local" id="start_end" name="start_end" value="YYYY-MM-DD'T'HH:mm:ss"
+            min="2022-10-27T00:00:00" max="2122-10-27T00:00:00" step="1"
+            onchange="data_to_unix('unix_ed','start_end');">
+          <input type="hidden" id="unix_ed" name="e_dt" value="<!--#e_dt-->">
+        </td>
+      </tr>
+      <tr>
+        <td class="center">Repeat</td>
+        <td><input type="number" min="0" max="999" id="set_num" name="set_num" value="<!--#t_rept1-->" size="5"
+            style="width:50px" onchange="repead_to_unix();">
+          <select name="repeat" id="repeat" onchange="repead_to_unix();">
+            <!--#t_rept2-->
+
+          </select>
+        </td>
+      </tr>
+      <tr>
+        <td class="center">Action</td>
+        <td><select name="action" id="action" onchange="action();">
+            <!--#t_action-->
+          </select>
+          <input type="hidden" id="h_repeat" name="h_repeat" value="<!--#t_repeat-->">
+        </td>
+      </tr>
+      <tr>
+        <td class="center">Group</td>
+        <td><input type="text" minlength="1" maxlength="10" id="t_group" name="t_group" size="12"
+            value="<!--#t_group-->"></td>
+      </tr>
+      </td>
+
+      <tr>
+        <td class="center">Sunrise</td>
+        <td>
+          <input type="checkbox" id="hsunrise" <!--#sunrise--> onclick="getValue('hsunrise','sunrise')">
+          <input type="hidden" name="sunrise" id="sunrise" value="">
+
+        </td>
+      </tr>
+
+      <tr>
+        <td class="center">Sunset</td>
+        <td>
+          <input type="checkbox" id="hsunset" <!--#sunset--> onclick="getValue('hsunset','sunset')">
+          <input type="hidden" name="sunset" id="sunset" value="">
+        </td>
+      </tr>
+      <tr>
+        <td class="center">INFO</td>
+        <td><input type="t_info" minlength="1" maxlength="30" id="t_info" name="t_info" size="20"
+            value="<!--#t_info-->"></td>
+      </tr>
+      <tr>
+        <td class="center">On/Off</td>
+        <td>
+          <input type="hidden" name="t_onoff" id="t_onoff" value="">
+          <label class="switch">
+            <input type="checkbox" name="onoff_0" id="onoff_0" value="1" <!--#t_onoff-->
+            onclick="getValue('onoff_0','t_onoff')">
+            <span class="slider round"></span>
+          </label>
+        </td>
+      </tr>
+    </table>
+  </form>
+
+
+
+  <script>
+
+    function getValue(id1, id2) {
+      var result = "";
+      if (document.getElementById(id1).checked) {
+        //console.log("sunrise is checked");
+        result = "1";
+      } else {
+        //console.log("sunrise didn't check it!");
+        result = "0";
+      }
+      document.getElementById(id2).value = result; // Перезапишем <!--#sunrise-->"
+      //console.log("value = ", result);
+    }
+
+
+
+    function imm() { // При активации checked скрываем нужные поля.
+      var checkBox = document.getElementById("himmediately");
+      //var xor = document.querySelectorAll('.cls')[0];
+      var x1 = document.getElementById("hide_show1");
+      var x2 = document.getElementById("hide_show2");
+      //console.log("checkBox.checked = ", checkBox.checked);
+      if (checkBox.checked == true) {
+        x1.style.display = 'none'; //block
+        x2.style.display = 'none'; //block
+      } else {
+        x1.style.display = 'table-row';
+        x2.style.display = 'table-row';
+      }
+
+    }
+  </script>
+  <script>
+    //For action
+    /*     var objSelect = document.getElementById("action");
+        setSelectedValue(objSelect, "OFF"); // Здесь нужно ввести <!--#TAG--> вместо "OFF"
+    
+        //For repeat
+        var set_num = document.getElementById("set_num");
+    
+        var objSelect = document.getElementById("repeat");
+        setSelectedValue(objSelect, "Seconds"); // Здесь нужно ввести <!--#t_repeat--> вместо ""Seconds""
+    
+        function setSelectedValue(selectObj, valueToSet) {
+          for (var i = 0; i < selectObj.options.length; i++) {
+            if (selectObj.options[i].text == valueToSet) {
+              selectObj.options[i].selected = true;
+              return;
+            }
+          }
+        } */
+
+
+
+    function data_to_unix(id1, id2) {
+
+      var dt_id = id1;
+      var input_id = id2;
+
+      var dateStr = document.getElementById(input_id).value;
+
+      var dateString = dateStr,
+        dateTimeParts = dateString.split('T'),
+        timeParts = dateTimeParts[1].split(':'),
+        dateParts = dateTimeParts[0].split('-'),
+        date;
+
+      if (typeof timeParts[2] == 'undefined') {
+        var sParts = 0;
+      } else {
+        var sParts = timeParts[2];
+      }
+
+      console.log(timeParts[2]);
+
+      var d = new Date(dateParts[0], dateParts[1] - 1, dateParts[2], timeParts[0], timeParts[1], sParts);
+
+      document.getElementById(dt_id).value = d.getTime() / 1000;
+    }
+
+    function convert_date(id1, id2) {
+      var unix_ts_id = id1;
+      var date_convert_id = id2;
+      var unixtimestamp = document.getElementById(unix_ts_id).value;
+      if (unixtimestamp != '0') {
+        var date = new Date(unixtimestamp * 1000);
+
+        var day = ("0" + date.getDate()).slice(-2);
+        var manth = ("0" + (date.getMonth() + 1)).slice(-2);
+        var year = date.getFullYear();
+
+        var hours = "0" + date.getHours();
+        var minutes = "0" + date.getMinutes();
+        var seconds = "0" + date.getSeconds();
+
+        var formattedDateTime = year + '-' + manth + '-' + day + 'T' + hours.substr(-2) + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+
+        document.getElementById(date_convert_id).value = formattedDateTime;
+
+      }
+    }
+
+    function repead_to_unix() {
+      var set_num = document.getElementById('set_num').value;
+      var repeat = document.getElementById('repeat').value;
+      //console.log("repeat = ", repeat);
+      let result = 0;
+      switch (repeat) {
+        case '0':
+          result = 0;
+          break;
+        case '1':
+          result = set_num; // second(s)
+          break;
+        case '2':
+          result = set_num * 60; // minut(s)
+          break;
+        case '3':
+          result = set_num * 3600; // hour(s)
+          break;
+        case '4':
+          result = set_num * 86400; //day(s) 
+          break;
+        case '5':
+          result = set_num * 604800; // week(s)
+          break;
+        case '6':
+          result = set_num * 2592000; // month(s) (30д => Апрель, Июнь, Сентябрь, Ноябрь)
+          break;
+        case '7':
+          result = set_num * 31536000; // year(s) (31 622 400 если год високосный)
+          break;
+        default:
+          result = 0;
+      }
+      //document.getElementById("repeat").innerHTML = "You select case № " + repeat;
+      //console.log("set_num = ", set_num);
+      //console.log("result => ", result);
+      //console.log("repeat => ", repeat);
+      document.getElementById('h_repeat').value = result; // Перезапишем <!--#t_repeat-->" 
+    }
+
+    function action() {
+      var action = document.getElementById('action').value;
+      //console.log("action => ", action);
+      let result = 0;
+      switch (action) {
+        case '0':
+          result = 0;
+          break;
+        case '1':
+          result = 1; // second(s)
+          break;
+        case '2':
+          result = 2; // minut(s)
+          break;
+        default:
+          result = 0;
+      }
+      document.getElementById('action').value = result; // Перезапишем <!--#t_action-->" 
+    }
+
+    function setFirstSettings() {
+      convert_date('unix_sd', 'start_date');
+      convert_date('unix_ed', 'start_end');
+      getValue('hsunset', 'sunset');
+      getValue('hsunrise', 'sunrise');
+      getValue('himmediately', 'immediately');
+      getValue('ht_onoff', 't_onoff');
+      imm();
+    }
+
+  </script>
+</body>
+
+</html>

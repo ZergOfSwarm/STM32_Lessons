@@ -1,0 +1,31 @@
+<!DOCTYPE HTML>
+<html>
+
+<head>
+  <title>Таблица</title>
+  <link type="image/x-icon" rel="shortcut icon" href="favicon.ico">
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <link rel="stylesheet" href="styles.css">
+
+</head>
+
+<body>
+
+  <center>
+    <h1>'DevEBox' - STM32F407VG</h1>
+    <!--#menu-->
+    <p><strong>The STM32 family of 32-bit microcontrollers based on the Arm® Cortex®-M processor is designed to offer
+        new degrees of freedom to MCU users. It offers products combining very high performance, real-time capabilities,
+        digital signal processing, low-power / low-voltage operation, and connectivity, while maintaining full
+        integration and ease of development.</strong></p>
+    <br><br>
+  </center>
+
+
+
+
+</body>
+
+</html>

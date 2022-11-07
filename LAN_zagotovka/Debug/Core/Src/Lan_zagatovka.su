@@ -1,0 +1,10 @@
+Lan_zagatovka.c:161:10:ssi_handler	120	static
+Lan_zagatovka.c:657:13:CGIForm_Handler	32	static
+Lan_zagatovka.c:673:13:CGIForm_Handler1	32	static
+Lan_zagatovka.c:701:13:CGIForm_Handler2	32	static
+Lan_zagatovka.c:718:13:CGIForm_Handler3	80	static
+Lan_zagatovka.c:937:13:CGIForm_Handler4	40	static
+Lan_zagatovka.c:1079:7:httpd_post_begin	24	static
+Lan_zagatovka.c:1102:7:httpd_post_receive_data	16	static
+Lan_zagatovka.c:1127:6:httpd_post_finished	1176	static
+Lan_zagatovka.c:1268:6:http_server_init	8	static
