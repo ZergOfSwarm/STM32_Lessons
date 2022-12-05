@@ -1,0 +1,14 @@
+core_cm3.h:1876:26:ITM_SendChar	16	static,ignoring_inline_asm
+main.c:69:5:_write	32	static
+main.c:120:10:btn0	16	static
+main.c:90:5:main	16	static
+main.c:129:10:btn1	16	static
+main.c:138:10:btn2	16	static
+main.c:148:11:keyboard	16	static
+main.c:228:6:SystemClock_Config	88	static
+main.c:270:13:MX_ADC1_Init	24	static
+main.c:333:13:MX_USART2_UART_Init	8	static
+main.c:362:13:MX_DMA_Init	16	static
+main.c:379:13:MX_GPIO_Init	16	static
+main.c:399:6:HAL_TIM_PeriodElapsedCallback	16	static
+main.c:415:6:Error_Handler	4	static,ignoring_inline_asm
