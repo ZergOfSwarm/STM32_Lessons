@@ -1,0 +1,11 @@
+core_cm3.h:1876:26:ITM_SendChar	4
+main.c:84:5:_write	2
+main.c:103:5:main	1
+main.c:185:6:SystemClock_Config	4
+main.c:233:13:MX_RTC_Init	4
+main.c:291:13:MX_USART1_UART_Init	2
+main.c:324:13:MX_GPIO_Init	1
+main.c:360:6:Start_Cron_Task	5
+main.c:427:6:Start_Action_Task	9
+main.c:498:6:HAL_TIM_PeriodElapsedCallback	2
+main.c:515:6:Error_Handler	1
