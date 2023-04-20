@@ -99,6 +99,38 @@ int _write(int file, char *ptr, int len) {
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
+/************** Медианный фильтр *******************/
+float median(float newVal)
+{
+    static float buf[3];
+    static int count = 0;
+    buf[count] = newVal;
+    if (++count > 2)
+        count = 0;
+
+    float a = buf[0];
+    float b = buf[1];
+    float c = buf[2];
+
+    float middle;
+    if ((a <= b) && (a <= c))
+    {
+        middle = (b <= c) ? b : c;
+    }
+    else
+    {
+        if ((b <= a) && (b <= c))
+        {
+            middle = (a <= c) ? a : c;
+        }
+        else
+        {
+            middle = (a <= b) ? a : b;
+        }
+    }
+    return middle;
+}
+
 void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
 {
 	if(htim == &htim3)
@@ -128,6 +160,8 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
 
 				char str[96] = {0,};
 				//snprintf(str, 96, "Capture Freq: %.3f Hz | res: %lu | cm: %d | cs: %d\n", (float)freq, res, count_main, count_secondary);
+				freq = median(freq);
+
 				snprintf(str, 96, "Capture Freq: %.3f Hz\n", (float)freq);
 				HAL_UART_Transmit(&huart1, (uint8_t*)str, strlen(str), 1000);
 
@@ -457,7 +491,7 @@ static void MX_TIM3_Init(void)
 
   /* USER CODE END TIM3_Init 1 */
   htim3.Instance = TIM3;
-  htim3.Init.Prescaler = 71;
+  htim3.Init.Prescaler = 7199;
   htim3.Init.CounterMode = TIM_COUNTERMODE_UP;
   htim3.Init.Period = 65535;
   htim3.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
