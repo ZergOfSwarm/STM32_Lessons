@@ -1,0 +1,11 @@
+vs1053_ini.c:43:13:SpiInit	1
+vs1053_ini.c:51:16:SPI_sendByte	3
+vs1053_ini.c:66:6:vs1053_init	1
+vs1053_ini.c:78:6:vs1053_reset	3
+vs1053_ini.c:121:6:vs1053_sinewave_beep	4
+vs1053_ini.c:147:6:vs1053_isDataReq	2
+vs1053_ini.c:157:6:vs1053_send32	2
+vs1053_ini.c:168:6:vs1053_setvolume	1
+vs1053_ini.c:181:6:vs1053_writeCommand	1
+vs1053_ini.c:194:6:vs1053_writeData	1
+vs1053_ini.c:205:10:vs1053_readData	1
