@@ -1274,7 +1274,7 @@ void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size) {
  80008aa:	2200      	movs	r2, #0
  80008ac:	701a      	strb	r2, [r3, #0]
  80008ae:	e01e      	b.n	80008ee <HAL_UARTEx_RxEventCallback+0x13a>
-			}else if (strncmp(checkBuf, "vol=", 4) == 0) {
+			}else if (strncmp((const char *)checkBuf, "vol=", 4) == 0) {
  80008b0:	2204      	movs	r2, #4
  80008b2:	492c      	ldr	r1, [pc, #176]	; (8000964 <HAL_UARTEx_RxEventCallback+0x1b0>)
  80008b4:	4828      	ldr	r0, [pc, #160]	; (8000958 <HAL_UARTEx_RxEventCallback+0x1a4>)
@@ -1283,18 +1283,18 @@ void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size) {
  80008bc:	2b00      	cmp	r3, #0
  80008be:	d116      	bne.n	80008ee <HAL_UARTEx_RxEventCallback+0x13a>
 				// Извлекаем значение переменной
-				vol = atoi(checkBuf + 4);
- 80008c0:	4b29      	ldr	r3, [pc, #164]	; (8000968 <HAL_UARTEx_RxEventCallback+0x1b4>)
- 80008c2:	4618      	mov	r0, r3
- 80008c4:	f003 fa50 	bl	8003d68 <atoi>
- 80008c8:	4603      	mov	r3, r0
- 80008ca:	4a28      	ldr	r2, [pc, #160]	; (800096c <HAL_UARTEx_RxEventCallback+0x1b8>)
- 80008cc:	6013      	str	r3, [r2, #0]
-				// Меняем значение громкости.
 				pause_flag = true;
- 80008ce:	4b23      	ldr	r3, [pc, #140]	; (800095c <HAL_UARTEx_RxEventCallback+0x1a8>)
- 80008d0:	2201      	movs	r2, #1
- 80008d2:	701a      	strb	r2, [r3, #0]
+ 80008c0:	4b26      	ldr	r3, [pc, #152]	; (800095c <HAL_UARTEx_RxEventCallback+0x1a8>)
+ 80008c2:	2201      	movs	r2, #1
+ 80008c4:	701a      	strb	r2, [r3, #0]
+				vol = atoi((const char *)checkBuf + 4);
+ 80008c6:	4b28      	ldr	r3, [pc, #160]	; (8000968 <HAL_UARTEx_RxEventCallback+0x1b4>)
+ 80008c8:	4618      	mov	r0, r3
+ 80008ca:	f003 fa4d 	bl	8003d68 <atoi>
+ 80008ce:	4603      	mov	r3, r0
+ 80008d0:	4a26      	ldr	r2, [pc, #152]	; (800096c <HAL_UARTEx_RxEventCallback+0x1b8>)
+ 80008d2:	6013      	str	r3, [r2, #0]
+				// Меняем значение громкости.
 				vs1053_setvolume(vol,vol);
  80008d4:	4b25      	ldr	r3, [pc, #148]	; (800096c <HAL_UARTEx_RxEventCallback+0x1b8>)
  80008d6:	681b      	ldr	r3, [r3, #0]

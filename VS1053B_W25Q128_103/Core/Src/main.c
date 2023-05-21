@@ -483,11 +483,11 @@ void HAL_UARTEx_RxEventCallback(UART_HandleTypeDef *huart, uint16_t Size) {
 			} else if (checkBuf[0] == 'r') {
 				pause_flag = false;
 				stop_flag = false;
-			}else if (strncmp(checkBuf, "vol=", 4) == 0) {
+			}else if (strncmp((const char *)checkBuf, "vol=", 4) == 0) {
 				// Извлекаем значение переменной
-				vol = atoi(checkBuf + 4);
-				// Меняем значение громкости.
 				pause_flag = true;
+				vol = atoi((const char *)checkBuf + 4);
+				// Меняем значение громкости.
 				vs1053_setvolume(vol,vol);
 				pause_flag = false;
 			}
