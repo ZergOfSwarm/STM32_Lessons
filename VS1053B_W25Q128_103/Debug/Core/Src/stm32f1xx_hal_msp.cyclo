@@ -1,0 +1,5 @@
+stm32f1xx_hal_msp.c:66:6:HAL_MspInit	1
+stm32f1xx_hal_msp.c:92:6:HAL_SPI_MspInit	3
+stm32f1xx_hal_msp.c:160:6:HAL_SPI_MspDeInit	3
+stm32f1xx_hal_msp.c:209:6:HAL_UART_MspInit	4
+stm32f1xx_hal_msp.c:284:6:HAL_UART_MspDeInit	2

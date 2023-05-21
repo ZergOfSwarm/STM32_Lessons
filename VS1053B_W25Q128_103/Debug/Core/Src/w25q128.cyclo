@@ -1,0 +1,9 @@
+w25q128.c:15:10:SPI_SendReceiveByte	3
+w25q128.c:30:6:flash_reset	1
+w25q128.c:44:6:flash_write_enable	1
+w25q128.c:53:9:flash_read_status_reg1	1
+w25q128.c:66:6:flash_chip_erase	2
+w25q128.c:77:6:erase_sector	2
+w25q128.c:92:6:flash_write_page	3
+w25q128.c:112:7:flash_read_page	2
+w25q128.c:129:9:get_flash_id	3
