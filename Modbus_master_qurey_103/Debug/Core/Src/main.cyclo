@@ -1,0 +1,8 @@
+main.c:64:6:HAL_UARTEx_RxEventCallback	1
+main.c:73:6:sendData	1
+main.c:85:5:main	1
+main.c:178:6:SystemClock_Config	3
+main.c:218:13:MX_USART1_UART_Init	2
+main.c:251:13:MX_GPIO_Init	1
+main.c:287:6:HAL_TIM_PeriodElapsedCallback	2
+main.c:304:6:Error_Handler	1
