@@ -1,0 +1,8 @@
+../Core/Src/modbusSlave.c:16:6:sendData	24	static
+../Core/Src/modbusSlave.c:28:6:modbusException	16	static
+../Core/Src/modbusSlave.c:40:9:readHoldingRegs	24	static
+../Core/Src/modbusSlave.c:79:9:readInputRegs	24	static
+../Core/Src/modbusSlave.c:118:9:readCoils	40	static
+../Core/Src/modbusSlave.c:184:9:readInputs	40	static
+../Core/Src/modbusSlave.c:250:9:writeHoldingRegs	24	static
+../Core/Src/modbusSlave.c:294:9:writeSingleReg	16	static
