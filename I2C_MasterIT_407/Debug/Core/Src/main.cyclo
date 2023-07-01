@@ -1,0 +1,6 @@
+main.c:68:5:main	1
+main.c:114:6:SystemClock_Config	3
+main.c:160:13:MX_I2C1_Init	2
+main.c:194:13:MX_GPIO_Init	1
+main.c:231:6:HAL_TIM_PeriodElapsedCallback	2
+main.c:248:6:Error_Handler	1
