@@ -1,0 +1,13 @@
+core_cm3.h:1876:26:ITM_SendChar	4
+main.c:92:5:_write	2
+main.c:104:6:MPU6050_Init	2
+main.c:138:6:MPU6050_Read_Accel	1
+main.c:160:6:MPU6050_Read_Gyro	3
+main.c:208:6:ComplementaryFilter	1
+main.c:226:5:main	1
+main.c:284:6:SystemClock_Config	3
+main.c:324:13:MX_I2C1_Init	2
+main.c:358:13:MX_USART1_UART_Init	2
+main.c:391:13:MX_GPIO_Init	1
+main.c:417:6:HAL_TIM_PeriodElapsedCallback	2
+main.c:434:6:Error_Handler	1
