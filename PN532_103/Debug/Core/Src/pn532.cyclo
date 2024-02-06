@@ -1,0 +1,16 @@
+pn532.c:44:5:PN532_WriteFrame	6
+pn532.c:84:5:PN532_ReadFrame	9
+pn532.c:143:5:PN532_CallFunction	10
+pn532.c:199:5:PN532_GetFirmwareVersion	2
+pn532.c:212:5:PN532_SamConfiguration	1
+pn532.c:231:5:PN532_ReadPassiveTarget	5
+pn532.c:270:5:PN532_MifareClassicAuthenticateBlock	3
+pn532.c:305:5:PN532_MifareClassicReadBlock	3
+pn532.c:329:5:PN532_MifareClassicWriteBlock	2
+pn532.c:350:5:PN532_Ntag2xxReadBlock	3
+pn532.c:377:5:PN532_Ntag2xxWriteBlock	2
+pn532.c:405:5:PN532_ReadGpio	1
+pn532.c:414:6:PN532_ReadGpioP	5
+pn532.c:431:6:PN532_ReadGpioI	2
+pn532.c:460:5:PN532_WriteGpio	1
+pn532.c:474:5:PN532_WriteGpioP	8

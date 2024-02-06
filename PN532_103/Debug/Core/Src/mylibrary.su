@@ -1,0 +1,2 @@
+../Core/Src/mylibrary.c:12:9:string_compare	32	static
+../Core/Src/mylibrary.c:26:6:Message_handler	8	static

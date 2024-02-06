@@ -1,0 +1,16 @@
+../Core/Src/pn532.c:44:5:PN532_WriteFrame	296	static
+../Core/Src/pn532.c:84:5:PN532_ReadFrame	296	static
+../Core/Src/pn532.c:143:5:PN532_CallFunction	296	static
+../Core/Src/pn532.c:199:5:PN532_GetFirmwareVersion	32	static
+../Core/Src/pn532.c:212:5:PN532_SamConfiguration	40	static
+../Core/Src/pn532.c:231:5:PN532_ReadPassiveTarget	72	static
+../Core/Src/pn532.c:270:5:PN532_MifareClassicAuthenticateBlock	64	static
+../Core/Src/pn532.c:305:5:PN532_MifareClassicReadBlock	64	static
+../Core/Src/pn532.c:329:5:PN532_MifareClassicWriteBlock	64	static
+../Core/Src/pn532.c:350:5:PN532_Ntag2xxReadBlock	64	static
+../Core/Src/pn532.c:377:5:PN532_Ntag2xxWriteBlock	56	static
+../Core/Src/pn532.c:405:5:PN532_ReadGpio	32	static
+../Core/Src/pn532.c:414:6:PN532_ReadGpioP	40	static
+../Core/Src/pn532.c:431:6:PN532_ReadGpioI	40	static
+../Core/Src/pn532.c:460:5:PN532_WriteGpio	40	static
+../Core/Src/pn532.c:474:5:PN532_WriteGpioP	40	static
